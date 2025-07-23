@@ -20,7 +20,7 @@ class NYTClient<T> {
     return client.get<T>(this.endpoint).then((res) => res.data);
   };
   getAll = async () => {
-    return client.get<FetchResponse<T>>(this.endpoint).then((res) => res.data);
+    return client.get<FetchResponse<T>>(this.endpoint).then((res) => res.data.results);
   };
 }
 export default <T>(endpoint: string) => new NYTClient<T>(endpoint);
