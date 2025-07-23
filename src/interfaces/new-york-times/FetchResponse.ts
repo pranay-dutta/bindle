@@ -1,8 +1,14 @@
-import type { Results } from "./Results";
-
-export interface FetchResponse {
+/**
+ * Only use `Overview` or `List` as the type argument for `T`.
+ *
+ * Example:
+ *   `FetchResponse<Overview>`
+ *   `FetchResponse<List>`
+ */
+export interface FetchResponse<T> {
   status: string;
   copyright: string;
   num_results: number;
-  results: Results;
+  last_modified?: string;
+  results: T;
 }

@@ -1,6 +1,6 @@
 import type { List } from "./List";
 
-export interface Results {
+export interface Overview {
   previous_published_date: Date;
   published_date: Date;
   next_published_date: string;
