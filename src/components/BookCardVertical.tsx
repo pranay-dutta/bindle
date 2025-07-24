@@ -17,6 +17,7 @@ const BookCardVertical = ({ book, index }: BookCardVerticalProps) => {
       borderRadius="none"
       transition="all 0.2s ease-in-out"
       border="none"
+      bg="inherit"
     >
       <Card.Body ps={index === 0 ? 0 : "initial"}>
         <Flex
@@ -32,11 +33,11 @@ const BookCardVertical = ({ book, index }: BookCardVerticalProps) => {
               colorPalette={text === "Popular" ? "red" : "green"}
             />
           </Box>
-          <Box minH={20}>
-            <Card.Title textWrap="balance">
+          <Box minH={24}>
+            <Card.Title textWrap="balance" lineClamp={2}>
               {toNormalCase(book.title)}
             </Card.Title>
-            <Card.Description>{book.author}</Card.Description>
+            <Card.Description lineClamp={2}>{book.author}</Card.Description>
           </Box>
         </Flex>
         <Flex justifyContent="space-between" alignItems="center" mt={3}>
