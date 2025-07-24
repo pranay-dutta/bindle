@@ -1,13 +1,19 @@
-import Recommendation from "@/components/Recommendation";
+import AdSection from "@/components/AdSection";
+import OurRecommendation from "@/components/OurRecommendation";
 import { Box, Container } from "@chakra-ui/react";
 
 const Homepage = () => {
   return (
-    <Box bg="gray.200" p={5}>
+    <>
+      <Box bg="gray.200" p={5}>
+        <Container>
+          <AdSection />
+        </Container>
+      </Box>
       <Container>
-        <Recommendation />
+        <OurRecommendation />
       </Container>
-    </Box>
+    </>
   );
 };
 

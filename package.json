@@ -6,10 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
     "preview": "vite preview",
     "test": "vitest",
     "test:ui": "vitest --ui",
+    "format": "prettier --write .",
     "prepare": "husky"
   },
   "dependencies": {

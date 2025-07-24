@@ -5,8 +5,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Button, Image } from "@chakra-ui/react";
 import type { Book } from "@/interfaces/new-york-times/Book";
 import { Pagination } from "swiper/modules";
+import { toNormalCase } from "@/utils";
 
-const Recommendation = () => {
+const AdSection = () => {
   const { isLoading, error, data } = useBookList("hardcover-nonfiction");
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
@@ -19,7 +20,6 @@ const Recommendation = () => {
       }}
       pagination={{ dynamicBullets: true }}
       spaceBetween={10}
-      navigation={{ enabled: true }}
       modules={[Pagination]}
     >
       {data.books.map(
@@ -27,7 +27,7 @@ const Recommendation = () => {
           book.book_image && (
             <SwiperSlide>
               <Box py={10}>
-                <RecommendationCard book={book} />
+                <AdCard book={book} />
               </Box>
             </SwiperSlide>
           )
@@ -36,14 +36,11 @@ const Recommendation = () => {
   );
 };
 
-export default Recommendation;
+export default AdSection;
 //TODO: Extract to utils
-const toNormalCase = (inputString: string) => {
-  return inputString.toLowerCase().replace(/(^|\s)\w/g, (c) => c.toUpperCase());
-};
 
 //TODO: Extract this component
-const RecommendationCard = ({ book }: { book: Book }) => {
+const AdCard = ({ book }: { book: Book }) => {
   return (
     <Card.Root
       maxW={"lg"}
