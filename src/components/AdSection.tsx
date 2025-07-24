@@ -1,11 +1,8 @@
 import useBookList from "@/hooks/useBookList";
-import { Box, Card, Flex } from "@chakra-ui/react";
-import { Swiper, SwiperSlide } from "swiper/react";
-
-import { Button, Image } from "@chakra-ui/react";
-import type { Book } from "@/interfaces/new-york-times/Book";
+import { Box } from "@chakra-ui/react";
 import { Pagination } from "swiper/modules";
-import { toNormalCase } from "@/utils";
+import { Swiper, SwiperSlide } from "swiper/react";
+import BookCardHorizontal from "./BookCardHorizontal";
 
 const AdSection = () => {
   const { isLoading, error, data } = useBookList("hardcover-nonfiction");
@@ -27,7 +24,7 @@ const AdSection = () => {
           book.book_image && (
             <SwiperSlide>
               <Box py={10}>
-                <AdCard book={book} />
+                <BookCardHorizontal book={book} />
               </Box>
             </SwiperSlide>
           )
@@ -37,54 +34,3 @@ const AdSection = () => {
 };
 
 export default AdSection;
-//TODO: Extract to utils
-
-//TODO: Extract this component
-const AdCard = ({ book }: { book: Book }) => {
-  return (
-    <Card.Root
-      maxW={"lg"}
-      borderRadius="none"
-      _hover={{ boxShadow: "lg", transform: "translateY(-4px)" }}
-      transition="all 0.2s ease-in-out"
-    >
-      <Card.Body>
-        <Flex gap={2} alignItems="center" justifyContent="space-between">
-          <Flex direction="column" gap={2}>
-            <Box minH={20}>
-              <Card.Title textWrap="pretty">
-                {toNormalCase(book.title)}
-              </Card.Title>
-              <Card.Description>{book.author}</Card.Description>
-            </Box>
-            <Button colorPalette="orange" variant="solid" w="max-content">
-              Buy now
-            </Button>
-          </Flex>
-          <Box>
-            <Image
-              minW={"160px"}
-              minH={"240px"}
-              h={"160px"}
-              w={"240px"}
-              objectFit="contain"
-              src={book.book_image}
-              alt={book.title}
-            />
-          </Box>
-        </Flex>
-      </Card.Body>
-    </Card.Root>
-  );
-};
-
-{
-  /* <Text textStyle="2xl" fontWeight="medium" letterSpacing="tight" mt="2">
-      $450
-    </Text> */
-}
-{
-  /* <Card.Footer gap="2">
-    <Button variant="ghost">Add to cart</Button>
-  </Card.Footer> */
-}
