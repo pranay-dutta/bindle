@@ -5,3 +5,7 @@ export const toNormalCase = (inputString: string) => {
 export const toKebabCase = (inputString: string) => {
   return inputString.toLowerCase().replace(/\s+/g, "-");
 };
+
+export const removeKebabCase = (inputString: string) => {
+  return inputString.replace(/-/g, " ");
+};
