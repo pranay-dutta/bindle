@@ -4,7 +4,7 @@ import createNytClient from "@/services/nytClient";
 import { useQuery } from "@tanstack/react-query";
 import ms from "ms";
 
-const useBookList = (listName: ListNames) => {
+const useNytBookList = (listName: ListNames) => {
   const nytClient = createNytClient<List>(`/current/${listName}.json`);
 
   return useQuery({
@@ -13,4 +13,4 @@ const useBookList = (listName: ListNames) => {
     staleTime: ms("2h"),
   });
 };
-export default useBookList;
+export default useNytBookList;

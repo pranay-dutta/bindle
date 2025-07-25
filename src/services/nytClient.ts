@@ -23,4 +23,7 @@ class NYTClient<T> {
     return client.get<FetchResponse<T>>(this.endpoint).then((res) => res.data.results);
   };
 }
-export default <T>(endpoint: string) => new NYTClient<T>(endpoint);
+const createNytClient = <T>(endpoint: string) => {
+  return new NYTClient<T>(endpoint);
+};
+export default createNytClient;

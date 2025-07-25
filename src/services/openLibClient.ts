@@ -16,4 +16,8 @@ class OpenLibClient<T> {
     return client.get<T>(this.endpoint, params).then((res) => res.data);
   };
 }
-export default <T>(endpoint: string) => new OpenLibClient<T>(endpoint);
+const createOpenLibClient = <T>(endpoint: string) => {
+  return new OpenLibClient<T>(endpoint);
+};
+
+export default createOpenLibClient;
