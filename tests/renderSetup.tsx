@@ -1,9 +1,16 @@
 import { render, screen } from "@testing-library/react";
-import { Provider } from "@/ui/provider";
+import { userEvent } from "@testing-library/user-event";
+import Providers from "@/providers";
+import { MemoryRouter } from "react-router";
 
 function setup(jsx: React.ReactElement) {
   return {
-    ...render(<Provider>{jsx}</Provider>),
+    user: userEvent.setup(),
+    ...render(
+      <MemoryRouter>
+        <Providers>{jsx}</Providers>
+      </MemoryRouter>
+    ),
   };
 }
 export { screen, setup };
