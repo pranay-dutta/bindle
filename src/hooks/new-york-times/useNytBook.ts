@@ -2,11 +2,12 @@ import type { BooksCategory } from "@/interfaces/new-york-times/BooksCategory";
 import type { List } from "@/interfaces/new-york-times/List";
 import { removeKebabCase } from "@/utils";
 import { useQueryClient } from "@tanstack/react-query";
-import { useLocation } from "react-router";
+import { useLocation, useParams } from "react-router";
 
-const useNytBook = (title: string | undefined) => {
+const useNytBook = () => {
   const queryClient = useQueryClient();
   const location = useLocation();
+  const { title } = useParams();
 
   // Assuming the location state contains the category of books
   const state = location.state as BooksCategory;
