@@ -8,6 +8,7 @@ const Navbar = () => {
     <Flex
       justify="space-between"
       p={5}
+      gap={3}
       borderBottom="1px"
       borderStyle="solid"
       borderBottomColor="gray.200"

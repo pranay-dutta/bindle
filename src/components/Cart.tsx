@@ -12,9 +12,10 @@ const Cart = ({ amount = 0 }: { amount?: number }) => {
       gap={2}
       alignItems="center"
       borderRadius="sm"
+      flexWrap="nowrap"
     >
       <FaShoppingCart />
-      <Text>
+      <Text textWrap="nowrap">
         {CURRENCY_SYMBOL} {amount}
       </Text>
     </Flex>
