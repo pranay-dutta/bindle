@@ -1,9 +1,9 @@
-import type { Book } from "@/interfaces/new-york-times/Book";
+import type { NytBook } from "@/interfaces/new-york-times/NytBook";
 import { Image } from "@chakra-ui/react";
 
 type BookImageProps = {
-  book: Book;
-  objectFit: "contain" | "cover";
+  book: NytBook;
+  objectFit: "contain" | "cover" | "fill";
   height?: string;
   width?: string;
 };

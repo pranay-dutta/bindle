@@ -1,11 +1,11 @@
-import useBookList from "@/hooks/useBookList";
+import useNytBookList from "@/hooks/new-york-times/useNytBookList";
 import { Box } from "@chakra-ui/react";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import BookCardHorizontal from "./BookCardHorizontal";
 
 const AdSection = () => {
-  const { isLoading, error, data } = useBookList("hardcover-nonfiction");
+  const { isLoading, error, data } = useNytBookList("hardcover-nonfiction");
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
   if (!data) return null;
@@ -13,7 +13,7 @@ const AdSection = () => {
   return (
     <Swiper
       breakpoints={{
-        1080: { slidesPerView: 3 },
+        1080: { slidesPerView: 3 }
       }}
       pagination={{ dynamicBullets: true }}
       spaceBetween={10}

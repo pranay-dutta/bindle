@@ -1,9 +1,9 @@
-import useBookList from "@/hooks/useBookList";
+import useNytBookList from "@/hooks/new-york-times/useNytBookList";
 import { Swiper, SwiperSlide } from "swiper/react";
 import BookCardVertical from "./BookCardVertical";
 
 const OurRecommendation = () => {
-  const { isLoading, error, data } = useBookList("young-adult-hardcover");
+  const { isLoading, error, data } = useNytBookList("young-adult-hardcover");
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
   if (!data) return null;

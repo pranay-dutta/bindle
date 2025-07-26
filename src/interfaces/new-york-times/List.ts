@@ -1,4 +1,4 @@
-import type { Book } from "./Book";
+import type { NytBook } from "./NytBook";
 import type { Updated } from "./Updated";
 
 export interface List {
@@ -9,5 +9,5 @@ export interface List {
   updated: Updated;
   list_id: number;
   uri: string;
-  books: Book[];
+  books: NytBook[];
 }

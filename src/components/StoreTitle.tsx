@@ -4,7 +4,11 @@ import { useNavigate } from "react-router";
 
 const StoreTitle = () => {
   const navigate = useNavigate();
-  return <Heading onClick={() => navigate("/")}>{STORE_TITLE}</Heading>;
+  return (
+    <Heading cursor="pointer" onClick={() => navigate("/")}>
+      {STORE_TITLE}
+    </Heading>
+  );
 };
 
 export default StoreTitle;

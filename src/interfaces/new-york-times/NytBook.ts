@@ -2,7 +2,7 @@ import type { Isbn } from "./Isbn";
 import type { BuyLink } from "./BuyLink";
 import type { AgeGroup } from "./AgeGroup";
 
-export interface Book {
+export interface NytBook {
   age_group: AgeGroup;
   amazon_product_url: string;
   article_chapter_link: string;
