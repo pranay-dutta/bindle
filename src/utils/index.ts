@@ -1,3 +1,6 @@
+import type { OLWork } from "@/interfaces/open-library/OLWork";
+const { VITE_OPEN_LIB_COVERS_URL } = import.meta.env;
+
 export const toNormalCase = (inputString: string) => {
   return inputString.toLowerCase().replace(/(^|\s)\w/g, (c) => c.toUpperCase());
 };
@@ -8,4 +11,28 @@ export const toKebabCase = (inputString: string) => {
 
 export const removeKebabCase = (inputString: string) => {
   return inputString.replace(/-/g, " ");
+};
+export const openLibKeyToWorkId = (key: string | undefined) => {
+  if (!key) return null;
+
+  const match = key.match(/\/books\/([^/]+)/);
+  return match ? match[1] : null;
+};
+
+export const extractWorkDescription = (work: OLWork | undefined): string | null => {
+  if (!work) return null;
+
+  if (!work.description) return null;
+  if (typeof work.description === "string") return work.description;
+  if (typeof work.description === "object" && "value" in work.description) return work.description.value;
+
+  return null;
+};
+
+export const getOLCoverUrls = (coverId: number) => {
+  return {
+    large: `${VITE_OPEN_LIB_COVERS_URL}${coverId}-L.jpg`,
+    medium: `${VITE_OPEN_LIB_COVERS_URL}${coverId}-M.jpg`,
+    small: `${VITE_OPEN_LIB_COVERS_URL}${coverId}-S.jpg`
+  };
 };
