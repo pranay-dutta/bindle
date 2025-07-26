@@ -1,17 +1,10 @@
 :root {
-  font-family: "Cormorant Garamond", serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  /* color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; */
 }
 .swiper-pagination-bullet-active {
-  background: #eb5a0c !important;
+  background: #ffffff !important;
+}
+.swiper-pagination-bullet {
+  background: #dad8d8 !important;
 }
