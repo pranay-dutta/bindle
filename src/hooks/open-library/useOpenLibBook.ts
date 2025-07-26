@@ -1,13 +1,20 @@
-import { useQuery } from "@tanstack/react-query";
+import type { OLBook } from "@/interfaces/open-library/OLBook";
 import createOpenLibClient from "@/services/openLibClient";
-import type { OpenLibraryBookData } from "@/interfaces/open-library";
+import useNytBookStore from "@/store/useNytBookStore";
+import { useQuery } from "@tanstack/react-query";
+import ms from "ms";
 
-export const useOpenLibBook = (isbn: string) => {
-  const client = createOpenLibClient<OpenLibraryBookData>(`/api/books`);
+const useOpenLibBook = (isbn?: string) => {
+  const currentNytBook = useNytBookStore((s) => s.nytBook);
+  const bookIsbn = isbn || currentNytBook.primary_isbn13;
+  const olClient = createOpenLibClient<OLBook>(`/isbn/${bookIsbn}.json`);
 
   return useQuery({
-    queryKey: ["OpenLibBook", isbn],
-    queryFn: () =>
-      client.get({ params: { bibkeys: isbn, jscmd: "data", format: "json" } }),
+    queryKey: ["open-lib-book", bookIsbn],
+    queryFn: olClient.get,
+    retry: 1,
+    staleTime: ms("1d")
   });
 };
+
+export default useOpenLibBook;

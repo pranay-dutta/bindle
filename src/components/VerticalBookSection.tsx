@@ -1,15 +1,16 @@
-import type { Book } from "@/interfaces/new-york-times/Book";
 import { toNormalCase } from "@/utils";
 import { Box, Heading, Flex, Text } from "@chakra-ui/react";
 import { Scrollbar } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import BookImage from "./BookImage";
+import type { List } from "@/interfaces/new-york-times/List";
 
 interface VerticalBookSectionProps {
-  books: Book[];
+  list: List;
   heading: string;
 }
-const VerticalBookSection = ({ books, heading }: VerticalBookSectionProps) => {
+const VerticalBookSection = ({ list, heading }: VerticalBookSectionProps) => {
+  const books = list.books;
   return (
     <Box p={5}>
       <Heading fontFamily="inherit" mb={6}>
@@ -31,7 +32,7 @@ const VerticalBookSection = ({ books, heading }: VerticalBookSectionProps) => {
                   height="210px"
                   width="140px"
                   book={book}
-                  objectFit="cover"
+                  objectFit="fill"
                 />
               </Box>
 

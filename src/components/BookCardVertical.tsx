@@ -1,15 +1,29 @@
-import type { Book } from "@/interfaces/new-york-times/Book";
-import { toNormalCase } from "@/utils";
+import type { NytBook } from "@/interfaces/new-york-times/NytBook";
+import { toKebabCase, toNormalCase } from "@/utils";
 import { Box, Button, Card, Flex, Text } from "@chakra-ui/react";
 import BookImage from "./BookImage";
 import Ticket from "./Ticket";
+import { useNavigate } from "react-router";
+import type { ListNames } from "@/interfaces/new-york-times/ListNames";
+import useNytBookStore from "@/store/useNytBookStore";
 
 interface BookCardVerticalProps {
-  book: Book;
+  book: NytBook;
+  category?: ListNames;
   index?: number;
 }
-const BookCardVertical = ({ book, index }: BookCardVerticalProps) => {
+const BookCardVertical = ({ book, index, category }: BookCardVerticalProps) => {
+  const setNytBook = useNytBookStore((state) => state.setNytBook);
+
+  const navigate = useNavigate();
   const text = book.weeks_on_list > 5 ? "Popular" : "New";
+
+  const handleClick = () => {
+    const title = toKebabCase(book.title);
+    setNytBook(book);
+
+    navigate(`/details/${title}`, { state: { category } });
+  };
 
   return (
     <Card.Root
@@ -20,21 +34,13 @@ const BookCardVertical = ({ book, index }: BookCardVerticalProps) => {
       bg="inherit"
     >
       <Card.Body ps={index === 0 ? 0 : "initial"}>
-        <Flex
-          gap={1}
-          direction="column"
-          alignItems="flex-start"
-          justifyContent="space-between"
-        >
+        <Flex gap={1} direction="column" alignItems="flex-start" justifyContent="space-between">
           <Box position="relative">
-            <BookImage book={book} objectFit="cover" />
-            <Ticket
-              text={text}
-              colorPalette={text === "Popular" ? "red" : "green"}
-            />
+            <BookImage book={book} objectFit="fill" />
+            <Ticket text={text} colorPalette={text === "Popular" ? "red" : "green"} />
           </Box>
           <Box minH={24}>
-            <Card.Title textWrap="balance" lineClamp={2}>
+            <Card.Title cursor="pointer" textWrap="balance" lineClamp={2} onClick={handleClick}>
               {toNormalCase(book.title)}
             </Card.Title>
             <Card.Description lineClamp={2}>{book.author}</Card.Description>
@@ -42,13 +48,7 @@ const BookCardVertical = ({ book, index }: BookCardVerticalProps) => {
         </Flex>
         <Flex justifyContent="space-between" alignItems="center" mt={3}>
           <Text>$ {book.price}</Text>
-          <Button
-            size="xs"
-            colorPalette="orange"
-            variant="solid"
-            w="max-content"
-            borderRadius={0}
-          >
+          <Button size="xs" colorPalette="orange" variant="solid" w="max-content" borderRadius={0}>
             Buy now
           </Button>
         </Flex>
