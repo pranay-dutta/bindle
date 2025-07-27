@@ -2,7 +2,7 @@ import useOpenLibBook from "@/hooks/open-library/useOpenLibBook";
 import useOpenLibWork from "@/hooks/open-library/useOpenLibWork";
 import useNytBookStore from "@/store/useNytBookStore";
 import { extractWorkDescription, toNormalCase } from "@/utils";
-import { Box, Flex, Heading, Image, Strong, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Image, Quote, Strong, Text } from "@chakra-ui/react";
 
 const BookDetailPage = () => {
   const nytBook = useNytBookStore((s) => s.nytBook);
@@ -21,7 +21,7 @@ const BookDetailPage = () => {
         <Image minW={`${width}px`} minH={`${height}px`} objectFit="fill" src={nytBook.book_image} />
       </Box>
 
-      <Flex direction="column" gap={4}>
+      <Flex direction="column" gap={4} w="100%">
         {/* Book name and author */}
         <Box>
           <Heading fontFamily="inherit">{toNormalCase(nytBook.title)}</Heading>
@@ -29,7 +29,7 @@ const BookDetailPage = () => {
         </Box>
 
         {/* Review Publication Page count */}
-        <Flex justifyContent="space-between" alignItems="center">
+        <Flex gap={4}>
           <Text color="gray.600">
             <Strong>ISBN:</Strong> {nytBook.primary_isbn13}
           </Text>
@@ -40,6 +40,9 @@ const BookDetailPage = () => {
             <Strong>Number of Pages:</Strong> {openLibBook?.number_of_pages}
           </Text>
         </Flex>
+        <Quote fontWeight="normal" fontStyle="italic">
+          {nytBook.description || openLibBook?.subtitle}
+        </Quote>
 
         {/* Book description */}
         <Box>
