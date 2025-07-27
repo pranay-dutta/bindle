@@ -1,5 +1,6 @@
 import AdSection from "@/components/AdSection";
 import BookCategorySection from "@/components/BookCategorySection";
+import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import OurRecommendation from "@/components/OurRecommendation";
 import VerticalBookSection from "@/components/VerticalBookSection";
@@ -47,6 +48,9 @@ const Homepage = () => {
           </Container>
         </Container>
       </Box>
+
+      {/* Footer Section */}
+      <Footer />
     </>
   );
 };
