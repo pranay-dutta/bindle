@@ -29,10 +29,12 @@ export const extractWorkDescription = (work: OLWork | undefined): string | null 
   return null;
 };
 
-export const getOLCoverUrls = (coverId: number) => {
-  return {
-    large: `${VITE_OPEN_LIB_COVERS_URL}${coverId}-L.jpg`,
-    medium: `${VITE_OPEN_LIB_COVERS_URL}${coverId}-M.jpg`,
-    small: `${VITE_OPEN_LIB_COVERS_URL}${coverId}-S.jpg`
-  };
+export const getOLCoverUrls = (coverId: number | null) => {
+  if (!coverId) return [""];
+
+  return [
+    `${VITE_OPEN_LIB_COVERS_URL}${coverId}-L.jpg`,
+    `${VITE_OPEN_LIB_COVERS_URL}${coverId}-M.jpg`,
+    `${VITE_OPEN_LIB_COVERS_URL}${coverId}-S.jpg`
+  ];
 };
