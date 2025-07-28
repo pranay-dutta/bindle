@@ -6,6 +6,7 @@ import Ticket from "./Ticket";
 import { useNavigate } from "react-router";
 import type { ListNames } from "@/interfaces/new-york-times/ListNames";
 import useNytBookStore from "@/store/useNytBookStore";
+import { useState } from "react";
 
 interface BookCardVerticalProps {
   book: NytBook;
@@ -14,6 +15,7 @@ interface BookCardVerticalProps {
 }
 const BookCardVertical = ({ book, index, category }: BookCardVerticalProps) => {
   const setNytBook = useNytBookStore((state) => state.setNytBook);
+  const [bookCount, setBookCount] = useState(0);
 
   const navigate = useNavigate();
   const text = book.weeks_on_list > 5 ? "Popular" : "New";
@@ -26,13 +28,7 @@ const BookCardVertical = ({ book, index, category }: BookCardVerticalProps) => {
   };
 
   return (
-    <Card.Root
-      maxW={"fit-content"}
-      borderRadius="none"
-      transition="all 0.2s ease-in-out"
-      border="none"
-      bg="inherit"
-    >
+    <Card.Root maxW={"fit-content"} borderRadius="none" border="none" bg="inherit">
       <Card.Body ps={index === 0 ? 0 : "initial"}>
         <Flex gap={1} direction="column" alignItems="flex-start" justifyContent="space-between">
           <Box position="relative">
@@ -48,9 +44,43 @@ const BookCardVertical = ({ book, index, category }: BookCardVerticalProps) => {
         </Flex>
         <Flex justifyContent="space-between" alignItems="center" mt={3}>
           <Text>$ {book.price}</Text>
-          <Button size="xs" colorPalette="orange" variant="solid" w="max-content" borderRadius={0}>
-            Buy now
-          </Button>
+
+          {bookCount ? (
+            <>
+              <Button
+                onClick={() => setBookCount(bookCount - 1)}
+                size="xs"
+                colorPalette="orange"
+                variant="solid"
+                w="max-content"
+                borderRadius={0}
+              >
+                -
+              </Button>
+              {bookCount}
+              <Button
+                onClick={() => setBookCount(bookCount + 1)}
+                size="xs"
+                colorPalette="orange"
+                variant="solid"
+                w="max-content"
+                borderRadius={0}
+              >
+                +
+              </Button>
+            </>
+          ) : (
+            <Button
+              onClick={() => setBookCount(bookCount + 1)}
+              size="xs"
+              colorPalette="orange"
+              variant="solid"
+              w="max-content"
+              borderRadius={0}
+            >
+              Add to Cart
+            </Button>
+          )}
         </Flex>
       </Card.Body>
     </Card.Root>
