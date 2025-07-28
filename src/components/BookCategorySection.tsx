@@ -17,18 +17,14 @@ const BookCategorySection = ({ list, heading }: BookCategorySectionProps) => {
       <Heading fontFamily="inherit">{heading}</Heading>
       <Swiper
         breakpoints={{
-          1080: { slidesPerView: 5 },
+          1080: { slidesPerView: 5 }
         }}
-        pagination={{ dynamicBullets: true }}
         spaceBetween={10}
         loop
       >
         {books.map((book) => (
           <SwiperSlide key={book.title} style={{ width: "160px" }}>
-            <BookCardVertical
-              book={book}
-              category={list.list_name_encoded as ListNames}
-            />
+            <BookCardVertical book={book} category={list.list_name_encoded as ListNames} />
           </SwiperSlide>
         ))}
       </Swiper>
