@@ -12,6 +12,7 @@ const useOpenLibBook = (isbn?: string) => {
   return useQuery({
     queryKey: ["open-lib-book", bookIsbn],
     queryFn: olClient.get,
+    refetchOnWindowFocus: false,
     retry: 1,
     staleTime: ms("1d")
   });

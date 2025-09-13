@@ -23,12 +23,7 @@ const BookDetailPage = () => {
       <Flex my={5} gap={8} alignItems="flex-start">
         <Flex gap={2} direction="column">
           <Box height={height} width={width}>
-            <Image
-              height="100%"
-              width="100%"
-              objectFit="fill"
-              src={nytBook.book_image}
-            />
+            <Image height="100%" width="100%" objectFit="fill" src={nytBook.book_image} />
           </Box>
           <Button bg="gray.500" color="white" variant="solid">
             {CURRENCY_SYMBOL} 123 only
@@ -71,7 +66,6 @@ const BookDetailPage = () => {
 
           <Flex gap={4}>
             {/* Add to cart */}
-
             <Button maxW="100px" bg="#0C9DEB" colorPalette="blue" color="white">
               Buy Now
             </Button>
