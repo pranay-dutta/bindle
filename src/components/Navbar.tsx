@@ -1,7 +1,7 @@
 import { Flex } from "@chakra-ui/react";
 import StoreTitle from "./StoreTitle";
 import SearchInput from "./SearchInput";
-import Cart from "./Cart";
+import CartButton from "./CartButton";
 
 const Navbar = () => {
   return (
@@ -15,7 +15,7 @@ const Navbar = () => {
     >
       <StoreTitle />
       <SearchInput />
-      <Cart />
+      <CartButton />
     </Flex>
   );
 };

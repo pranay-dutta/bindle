@@ -1,4 +1,4 @@
-import Cart from "@/components/Cart";
+import CartButton from "@/components/CartButton";
 import { CURRENCY_SYMBOL } from "@/constants";
 import { describe, expect, it } from "vitest";
 import { screen, setup } from "../renderSetup";
@@ -6,7 +6,7 @@ import { screen, setup } from "../renderSetup";
 describe("Cart", () => {
   it("should render cart with correct amount", () => {
     const amount = 200;
-    setup(<Cart amount={amount} />);
+    setup(<CartButton amount={amount} />);
 
     const cartAmount = screen.getByText(`${CURRENCY_SYMBOL} ${amount}`);
 
@@ -15,7 +15,7 @@ describe("Cart", () => {
   });
 
   it("should render cart with default amount when none is passed", () => {
-    setup(<Cart />);
+    setup(<CartButton />);
 
     const cartAmount = screen.getByText(`${CURRENCY_SYMBOL} 0`);
 
