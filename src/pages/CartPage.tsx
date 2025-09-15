@@ -1,9 +1,10 @@
+import useImageFallback from "@/hooks/useImageFallback";
 import type { NytBook } from "@/interfaces/new-york-times/NytBook";
+import type { SearchedBook } from "@/interfaces/open-library/OLSearch";
 import useCartStore from "@/store/useCartStore";
-import { toNormalCase } from "@/utils";
+import { getOLCoverUrls, isNytBook, toNormalCase } from "@/utils";
 import { Box, Button, Flex, Heading, HStack, Image, Input, Span, Text } from "@chakra-ui/react";
 import { FiTrash } from "react-icons/fi";
-
 
 const CartPage = () => {
   const cart = useCartStore((state) => state.cart);
@@ -17,7 +18,7 @@ const CartPage = () => {
       <Flex direction="column" gap={5} width="1/2">
         <Heading fontSize="2xl">My Shopping Cart</Heading>
         {[...cart.keys()].map((book) => (
-          <ShoppingBook key={book.primary_isbn13} book={book} />
+          <ShoppingBook key={book.title} book={book} />
         ))}
       </Flex>
 
@@ -25,7 +26,7 @@ const CartPage = () => {
       <Flex direction="column" width="1/2">
         <Heading fontSize="2xl">My Order</Heading>
         {[...cart.keys()].map((book) => (
-          <Flex direction="row" justifyContent="space-between" key={book.primary_isbn13}>
+          <Flex direction="row" justifyContent="space-between" key={book.title}>
             <Text>
               {getQty(book)} x {toNormalCase(book.title)}
             </Text>
@@ -42,7 +43,7 @@ const CartPage = () => {
   );
 };
 
-const ShoppingBook = ({ book }: { book: NytBook }) => {
+const ShoppingBook = ({ book }: { book: NytBook | SearchedBook }) => {
   const removeItem = useCartStore((state) => state.removeItem);
   const setQty = useCartStore((state) => state.setQty);
   const getQty = useCartStore((state) => state.getQty);
@@ -59,12 +60,19 @@ const ShoppingBook = ({ book }: { book: NytBook }) => {
     // Update the quantity in the cart store
     setQty(book, newQty);
   };
+  const isNyt = isNytBook(book);
+  const urls = isNyt ? [] : getOLCoverUrls(book.cover_i || 0);
+  const { src, onError } = useImageFallback(urls);
 
   return (
     <Flex direction="row" gap={4} width="100%" borderBottom="1px solid black" pb={5}>
       {/* Book Cover */}
       <Box minW={width} h={height} w={width} minH={height}>
-        <Image width="100%" height="100%" src={book.book_image}></Image>
+        {isNyt ? (
+          <Image width="100%" height="100%" src={book.book_image} />
+        ) : (
+          <Image width="100%" height="100%" src={src} onError={onError} />
+        )}
       </Box>
 
       {/* Book Details */}
@@ -72,7 +80,7 @@ const ShoppingBook = ({ book }: { book: NytBook }) => {
         <HStack height="full" justifyContent="space-between" alignItems="flex-start">
           <Box>
             <Text>{toNormalCase(book.title)}</Text>
-            <Text>{book.author}</Text>
+            <Text>{isNyt && book.author}</Text>
           </Box>
 
           <Text onClick={() => removeItem(book)}>
