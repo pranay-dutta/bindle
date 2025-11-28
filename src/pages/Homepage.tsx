@@ -9,11 +9,11 @@ import { Box, Container, Flex, Heading } from "@chakra-ui/react";
 import { BsStars } from "react-icons/bs";
 
 const Homepage = () => {
-  const { data: children } = useNytBookList("childrens-middle-grade-hardcover");
-  const { data: selfDevelopment } = useNytBookList("advice-how-to-and-miscellaneous");
-  const { data: series } = useNytBookList("series-books");
+  const { data: childrenBooks } = useNytBookList("childrens-middle-grade-hardcover");
+  const { data: selfDevelopmentBooks } = useNytBookList("advice-how-to-and-miscellaneous");
+  const { data: seriesBooks } = useNytBookList("series-books");
 
-  if (!children || !selfDevelopment || !series) return null;
+  if (!childrenBooks || !seriesBooks || !selfDevelopmentBooks) return null;
 
   return (
     <>
@@ -40,11 +40,11 @@ const Homepage = () => {
       <Box bg="gray.100" p={5}>
         <Container as={Flex} gap={2}>
           <Container bg="gray.100" as={Flex} flexDirection="column" gap={2} maxW="70%" ms={0} p={0}>
-            <BookCategorySection list={children} heading={"For Little Readers"} />
-            <BookCategorySection list={selfDevelopment} heading={"Self Development"} />
+            <BookCategorySection list={childrenBooks.data} heading={"For Little Readers"} />
+            <BookCategorySection list={selfDevelopmentBooks.data} heading={"Self Development"} />
           </Container>
           <Container maxW="2xl" p={0} ms={0} bg="white">
-            <VerticalBookSection list={series} heading={"Series"} />
+            <VerticalBookSection list={seriesBooks.data} heading={"Series"} />
           </Container>
         </Container>
       </Box>

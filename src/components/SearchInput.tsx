@@ -10,7 +10,7 @@ const SearchInput = () => {
 
   const onSubmit = handleSubmit((data) => {
     navigate("/search");
-    setSearchParams({ q: data.query });
+    setSearchParams({ q: data.query, page: "1" });
   });
 
   return (

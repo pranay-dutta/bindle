@@ -11,4 +11,5 @@ export interface SearchedBook {
   cover_i?: number;
   key: string;
   title: string;
+  price: string;
 }
