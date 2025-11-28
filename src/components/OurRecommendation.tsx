@@ -11,7 +11,7 @@ const OurRecommendation = () => {
   return (
     <Swiper
       breakpoints={{
-        1080: { slidesPerView: 7 },
+        1080: { slidesPerView: 7 }
       }}
       pagination={{ dynamicBullets: true }}
       spaceBetween={10}

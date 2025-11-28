@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 import type { ListNames } from "@/interfaces/new-york-times/ListNames";
 import useNytBookStore from "@/store/useNytBookStore";
 import { useState } from "react";
+import useCartStore from "@/store/useCartStore";
 
 interface BookCardVerticalProps {
   book: NytBook;
@@ -15,15 +16,18 @@ interface BookCardVerticalProps {
 }
 const BookCardVertical = ({ book, index, category }: BookCardVerticalProps) => {
   const setNytBook = useNytBookStore((state) => state.setNytBook);
-  const [bookCount, setBookCount] = useState(0);
+  
+  const addBook = useCartStore((s) => s.increaseQty);
+  const removeBook = useCartStore((s) => s.decreaseQty);
 
   const navigate = useNavigate();
+
+  const [bookCount, setBookCount] = useState(0);
   const text = book.weeks_on_list > 5 ? "Popular" : "New";
 
   const handleClick = () => {
     const title = toKebabCase(book.title);
     setNytBook(book);
-
     navigate(`/details/${title}`, { state: { category } });
   };
 
@@ -48,7 +52,10 @@ const BookCardVertical = ({ book, index, category }: BookCardVerticalProps) => {
           {bookCount ? (
             <>
               <Button
-                onClick={() => setBookCount(bookCount - 1)}
+                onClick={() => {
+                  setBookCount(bookCount - 1);
+                  removeBook(book);
+                }}
                 size="xs"
                 colorPalette="orange"
                 variant="solid"
@@ -59,7 +66,10 @@ const BookCardVertical = ({ book, index, category }: BookCardVerticalProps) => {
               </Button>
               {bookCount}
               <Button
-                onClick={() => setBookCount(bookCount + 1)}
+                onClick={() => {
+                  setBookCount(bookCount + 1);
+                  addBook(book);
+                }}
                 size="xs"
                 colorPalette="orange"
                 variant="solid"
@@ -71,7 +81,10 @@ const BookCardVertical = ({ book, index, category }: BookCardVerticalProps) => {
             </>
           ) : (
             <Button
-              onClick={() => setBookCount(bookCount + 1)}
+              onClick={() => {
+                setBookCount(bookCount + 1);
+                addBook(book);
+              }}
               size="xs"
               colorPalette="orange"
               variant="solid"
