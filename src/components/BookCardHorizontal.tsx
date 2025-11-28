@@ -5,12 +5,7 @@ import BookImage from "./BookImage";
 
 const BookCardHorizontal = ({ book }: { book: NytBook }) => {
   return (
-    <Card.Root
-      maxW={"lg"}
-      borderRadius="none"
-      _hover={{ boxShadow: "lg", transform: "translateY(-4px)" }}
-      transition="all 0.2s ease-in-out"
-    >
+    <Card.Root maxW={"lg"} borderRadius="none">
       <Card.Body>
         <Flex gap={2} alignItems="center" justifyContent="space-between">
           <Flex direction="column" gap={2}>

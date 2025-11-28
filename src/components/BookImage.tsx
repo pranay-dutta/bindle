@@ -18,6 +18,12 @@ const BookImage = ({ book, objectFit, height, width }: BookImageProps) => {
       objectFit={objectFit}
       src={book.book_image}
       alt={book.title}
+      _hover={{
+        transform: "scale3d(1.04, 1.04, 1) translateX(5px)",
+        cursor: "pointer"
+      }}
+      transition={"transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)"}
+      willChange="transform"
     />
   );
 };

@@ -11,7 +11,7 @@ const OpenLibBookReel = () => {
 
   return (
     <Swiper slidesPerView={7} spaceBetween={5}>
-      {data?.works.map((work) => (
+      {data.works.map((work) => (
         <SwiperSlide key={work.key}>
           <OpenLibBook openLibBook={work} />
         </SwiperSlide>
