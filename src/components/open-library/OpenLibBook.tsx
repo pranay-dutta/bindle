@@ -1,19 +1,32 @@
 import useImageFallback from "@/hooks/useImageFallback";
 import type { Work } from "@/interfaces/open-library/SubjectData";
 import { getOLCoverUrls } from "@/utils";
-import { Box, Image, Skeleton } from "@chakra-ui/react";
+import { Badge, Box, Image, Skeleton } from "@chakra-ui/react";
 import { useState } from "react";
 
-const OpenLibBook = ({ openLibBook }: { openLibBook: Work }) => {
+const OpenLibBook = ({ openLibBook, text }: { openLibBook: Work; text?: "New" | "Sale" | "Popular" }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const urls = getOLCoverUrls(openLibBook.cover_id);
   const { src, onError } = useImageFallback(urls);
-  const height = 90 * 3;
-  const width = 90 * 2;
+  const [height, width] = [270, 180];
 
   return (
-    <Box height={height} width={width} overflow="clip">
-      <Skeleton loading={!isLoaded} height={height} width={width} position="absolute" top={0} left={0}>
+    <Box position="relative" height={height} width={width} overflow="clip">
+      <Skeleton loading={!isLoaded} height={height} width={width} top={0} left={0}>
+        {text && (
+          <Badge
+            top={2}
+            right={2}
+            size="md"
+            borderRadius={0}
+            position="absolute"
+            variant="solid"
+            colorPalette={text === "Popular" ? "red" : "orange"}
+            boxShadow="md"
+          >
+            {text}
+          </Badge>
+        )}
         <Image
           src={src}
           onLoad={() => setIsLoaded(true)}

@@ -35,9 +35,9 @@ export const getOLCoverUrls = (coverId: number | null) => {
   if (!coverId) return [""];
 
   return [
-    `${VITE_OPEN_LIB_COVERS_URL}${coverId}-L.jpg`,
     `${VITE_OPEN_LIB_COVERS_URL}${coverId}-M.jpg`,
-    `${VITE_OPEN_LIB_COVERS_URL}${coverId}-S.jpg`
+    `${VITE_OPEN_LIB_COVERS_URL}${coverId}-L.jpg`,
+    `${VITE_OPEN_LIB_COVERS_URL}${coverId}-S.jpg`,
   ];
 };
 

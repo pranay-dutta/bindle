@@ -1,108 +1,104 @@
-export type Subject =
+// Define the subjects array first
+export const SUBJECTS = [
   //Arts
-  | "Architecture"
-  | "Art Instruction"
-  | "Art History"
-  | "Dance"
-  | "Design"
-  | "Fashion"
-  | "Film"
-  | "Graphic Design"
-  | "Music"
-  | "Music Theory"
-  | "Painting"
-  | "Photography"
+  "Architecture",
+  "Art Instruction",
+  "Art History",
+  "Dance",
+  "Design",
+  "Fashion",
+  "Film",
+  "Graphic Design",
+  "Music",
+  "Music Theory",
+  "Painting",
+  "Photography",
   //Animals
-  | "Bears"
-  | "Cats"
-  | "Kittens"
-  | "Dogs"
-  | "Puppies"
+  "Bears",
+  "Cats",
+  "Kittens",
+  "Dogs",
+  "Puppies",
   //Fiction
-  | "Fantasy"
-  | "Historical_Fiction"
-  | "Horror"
-  | "Humor"
-  | "Literature"
-  | "Magic"
-  | "Mystery_and_detective_stories"
-  | "Plays"
-  | "Poetry"
-  | "Romance"
-  | "Science_Fiction"
-  | "Short_Stories"
-  | "Thriller"
-  | "Young_Adult"
+  "Fantasy",
+  "Historical_Fiction",
+  "Horror",
+  "Humor",
+  "Literature",
+  "Magic",
+  "Mystery_and_detective_stories",
+  "Plays",
+  "Poetry",
+  "Romance",
+  "Science_Fiction",
+  "Short_Stories",
+  "Thriller",
+  "Young_Adult",
   //Science Math
-  | "Biology"
-  | "Chemistry"
-  | "Mathematics"
-  | "Physics"
-  | "Programming"
+  "Biology",
+  "Chemistry",
+  "Mathematics",
+  "Physics",
+  "Programming",
   //Business Finance
-  | "Management"
-  | "Entrepreneurship"
-  | "Business_Economics"
-  | "Business_Success"
-  | "Finance"
+  "Management",
+  "Entrepreneurship",
+  "Business_Economics",
+  "Business_Success",
+  "Finance",
   //Childrens
-  | "Children's_Books"
-  | "Picture_Books"
-  | "Early_Readers"
-  | "Chapter_Books"
-  | "Middle_Grade"
-  | "Young_Adult"
+  "Children's_Books",
+  "Picture_Books",
+  "Early_Readers",
+  "Chapter_Books",
+  "Middle_Grade",
   //History
-  | "Ancient_Civilization"
-  | "Archaeology"
-  | "Anthropology"
-  | "World_War_II"
-  | "Social_Life_and_Customs"
+  "Ancient_Civilization",
+  "Archaeology",
+  "Anthropology",
+  "World_War_II",
+  "Social_Life_and_Customs",
   //Health Wellness
-  | "Cooking"
-  | "Cookbooks"
-  | "Mental_Health"
-  | "Exercise"
-  | "Nutrition"
-  | "Self_help"
+  "Cooking",
+  "Cookbooks",
+  "Mental_Health",
+  "Exercise",
+  "Nutrition",
+  "Self_help",
   //Biography
-  | "Autobiographies"
-  | "History"
-  | "Politics_and_Government"
-  | "World_War_II"
-  | "Women"
-  | "Kings_and_Rulers"
-  | "Composers"
-  | "Artists"
+  "Autobiographies",
+  "History",
+  "Politics_and_Government",
+  "Women",
+  "Kings_and_Rulers",
+  "Composers",
+  "Artists",
   //Social Sciences
-  | "Anthropology"
-  | "Religion"
-  | "Political_Science"
-  | "Psychology"
+  "Religion",
+  "Political_Science",
+  "Psychology",
   //Places
-  | "Brazil"
-  | "India"
-  | "Indonesia"
-  | "United_States"
+  "Brazil",
+  "India",
+  "Indonesia",
+  "United_States",
   //Textbooks
-  | "History"
-  | "Mathematics"
-  | "Geography"
-  | "Psychology"
-  | "Algebra"
-  | "Education"
-  | "Business_and_Economics"
-  | "Science"
-  | "Chemistry"
-  | "English_Language"
-  | "Physics"
-  | "Computer_Science"
+  "Geography",
+  "Algebra",
+  "Education",
+  "Business_and_Economics",
+  "Science",
+  "Computer_Science",
+  "English_Language",
   //Book by language
-  | "English"
-  | "French"
-  | "Spanish"
-  | "German"
-  | "Russian"
-  | "Italian"
-  | "Chinese"
-  | "Japanese";
+  "English",
+  "French",
+  "Spanish",
+  "German",
+  "Russian",
+  "Italian",
+  "Chinese",
+  "Japanese"
+] as const;
+
+export type Subject = (typeof SUBJECTS)[number];

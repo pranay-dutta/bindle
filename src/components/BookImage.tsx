@@ -4,11 +4,12 @@ import { Image } from "@chakra-ui/react";
 type BookImageProps = {
   book: NytBook;
   objectFit: "contain" | "cover" | "fill";
+  objectPosition?: string;
   height?: string;
   width?: string;
 };
 
-const BookImage = ({ book, objectFit, height, width }: BookImageProps) => {
+const BookImage = ({ book, objectFit, objectPosition, height, width }: BookImageProps) => {
   return (
     <Image
       minW={width || "160px"}
@@ -16,6 +17,7 @@ const BookImage = ({ book, objectFit, height, width }: BookImageProps) => {
       h={height || "160px"}
       w={width || "240px"}
       objectFit={objectFit}
+      objectPosition={objectPosition}
       src={book.book_image}
       alt={book.title}
       _hover={{
