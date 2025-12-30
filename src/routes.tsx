@@ -5,11 +5,11 @@ import BookDetailPage from "./pages/BookDetailPage";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import SearchResultsPage from "./pages/SearchResultsPage";
-import CategoryPageContainer from "./pages/categorypage/container/CategoryPageContainer";
 import RecommendationPage from "./pages/RecommendationPage";
 import NewReleasePage from "./pages/NewReleasePage";
 import EbookPage from "./pages/EbookPage";
 import SalePage from "./pages/SalePage";
+import CategoryPage from "./pages/CategoryPage";
 
 const router = createBrowserRouter([
   {
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
       },
       {
         path: "categories/:category",
-        element: <CategoryPageContainer />
+        element: <CategoryPage />
       },
       {
         path: "recommendations",
