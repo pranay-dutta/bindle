@@ -2,6 +2,7 @@ import AdSection from "@/components/AdSection";
 import BookCategorySection from "@/components/BookCategorySection";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import NavOptions from "@/components/NavOptions";
 import OurRecommendation from "@/components/OurRecommendation";
 import VerticalBookSection from "@/components/VerticalBookSection";
 import useNytBookList from "@/hooks/new-york-times/useNytBookList";
@@ -18,6 +19,7 @@ const Homepage = () => {
   return (
     <>
       <Navbar />
+      <NavOptions />
       {/* Top Ad Section */}
       <Box bg="gray.800" p={5}>
         <Container>
