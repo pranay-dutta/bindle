@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Book {
+  title            String    @id
+  author           String    @db.VarChar(255)
+  amazonProductUrl String    @db.VarChar(255)
+  bookImage        String    @db.VarChar(255)
+  description      String    @db.Text
+  price            Int       @db.Int
+  primaryIsbn10    String    @db.VarChar(255)
+  primaryIsbn13    String    @db.VarChar(255)
+  listId           Int?
+  bookList         BookList? @relation(fields: [listId], references: [id])
+}
+
+model BookList {
+  id              Int    @id
+  listName        String
+  listNameEncoded String
+  books           Book[]
+}
+
+model Sale {
+  title       String @id
+  author      String @db.VarChar(255)
+  bookImage   String @db.VarChar(255)
+  salePercent Float  @db.Float
+  isbn10      String @db.VarChar(255)
+  isbn13      String @db.VarChar(255)
+  price       Int  @db.Int
+}

@@ -1,0 +1,9 @@
+.vercel
+
+/generated/prisma
+
+.env
+node_modules
+/src/cache
+
+/prisma/migrations
