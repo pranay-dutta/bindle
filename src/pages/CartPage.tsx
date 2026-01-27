@@ -7,6 +7,7 @@ import {
   Box,
   Button,
   Flex,
+  Heading,
   HStack,
   Image,
   Input,
@@ -14,8 +15,11 @@ import {
   Text
 } from "@chakra-ui/react";
 import { FiTrash } from "react-icons/fi";
+import { useNavigate } from "react-router";
+import { MdOutlineEditNote } from "react-icons/md";
 
 const CartPage = () => {
+  const navigate = useNavigate();
   const cart = useCartStore((state) => state.cart);
   const getQty = useCartStore((state) => state.getQty);
   const totalCartValue = [...cart.keys()].reduce(
@@ -48,22 +52,14 @@ const CartPage = () => {
         </Flex>
 
         {/* My Orders */}
-        <Flex
-          direction="column"
-          gap={4}
-          width="2/5"
-          justifyContent="space-between"
-        >
-          <Box>
-            <Text mb={3} fontSize="3xl">
-              My Orders
-            </Text>
+        <Flex direction="column" width="2/5" maxH="100%">
+          <Text mb={3} fontSize="3xl">
+            My Orders
+          </Text>
+
+          <Flex overflowY="auto" direction="column" mb={4} flex="1" pr={2}>
             {[...cart.keys()].map((book) => (
-              <Flex
-                direction="row"
-                justifyContent="space-between"
-                key={book.title}
-              >
+              <Flex justifyContent="space-between" key={book.title}>
                 <Text truncate>
                   {getQty(book)} x {toNormalCase(book.title)}
                 </Text>
@@ -72,12 +68,33 @@ const CartPage = () => {
                 </Text>
               </Flex>
             ))}
+          </Flex>
 
-            <Text fontSize="xl" fontWeight="bold">
-              Total: ${totalCartValue}
-            </Text>
+          <Text fontSize="xl" fontWeight="bold" mb={4}>
+            Total: ${totalCartValue}
+          </Text>
+
+          <Box mb={4}>
+            <Flex justifyContent="space-between">
+              <Heading>Saved Address</Heading>
+              <Button
+                colorPalette="orange"
+                size="xs"
+                onClick={() => navigate("/checkout")}
+              >
+                <MdOutlineEditNote />
+                Edit
+              </Button>
+            </Flex>
+
+            <p>Pranay Dutta</p>
+            <p>8617436257</p>
+            <p>Subhasganj, Raiganj, U/D</p>
           </Box>
-          <Button bg="orange.500">Order and pay {totalCartValue}</Button>
+
+          <Button bg="orange.500" mt="auto">
+            Order and pay {totalCartValue}
+          </Button>
         </Flex>
       </Flex>
     </Box>
