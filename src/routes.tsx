@@ -10,6 +10,7 @@ import NewReleasePage from "./pages/NewReleasePage";
 import EbookPage from "./pages/EbookPage";
 import SalePage from "./pages/SalePage";
 import CategoryPage from "./pages/CategoryPage";
+import Addresses from "./pages/Addresses";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: "ebooks",
         element: <EbookPage />
+      },
+      {
+        path: "addresses",
+        element: <Addresses />
       },
       {
         path: "sale",
