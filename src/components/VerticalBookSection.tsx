@@ -8,39 +8,43 @@ import type { List } from "@/interfaces/new-york-times/List";
 interface VerticalBookSectionProps {
   list: List;
   heading: string;
+  height?: number;
 }
 const VerticalBookSection = ({ list, heading }: VerticalBookSectionProps) => {
   const books = list.books;
+
   return (
-    <Box p={5}>
-      <Heading fontFamily="inherit" mb={6}>
+    <Box p={{ base: 3, md: 5 }}>
+      <Heading mb={4} fontSize={{ base: "lg", md: "xl", lg: "2xl" }}>
         {heading}
       </Heading>
       <Swiper
         direction="vertical"
         modules={[Scrollbar]}
         scrollbar={{ draggable: true }}
-        style={{ height: "920px" }}
-        slidesPerView={4}
-        spaceBetween={20}
+        style={{ height: "870px" }}
+        slidesPerView="auto"
+        spaceBetween={16}
       >
         {books.map((book) => (
-          <SwiperSlide key={book.title}>
+          <SwiperSlide key={book.title} style={{ height: "auto" }}>
             <Flex gap={3} pr={4}>
-              <Box w="140px" h="210px">
-                <BookImage
-                  height="210px"
-                  width="140px"
-                  book={book}
-                  objectFit="fill"
-                />
+              <Box
+                flexShrink={0}
+                w={{ base: "80px", md: "100px", lg: "120px" }}
+              >
+                <BookImage width="100%" book={book} objectFit="cover" />
               </Box>
 
-              <Flex direction="column" justify="flex-start">
-                <Heading textWrap="pretty" fontFamily="inherit" fontSize="18px">
+              <Flex direction="column" justify="flex-start" minW={0}>
+                <Heading
+                  textWrap="pretty"
+                  fontSize={{ base: "sm", md: "md" }}
+                  lineClamp={2}
+                >
                   {toNormalCase(book.title)}
                 </Heading>
-                <Text fontSize="sm" color="gray.600">
+                <Text fontSize={{ base: "xs", md: "sm" }} color="gray.600">
                   {book.author}
                 </Text>
               </Flex>

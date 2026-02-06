@@ -9,19 +9,25 @@ type BookImageProps = {
   width?: string;
 };
 
-const BookImage = ({ book, objectFit, objectPosition, height, width }: BookImageProps) => {
+const BookImage = ({
+  book,
+  objectFit,
+  objectPosition,
+  height,
+  width
+}: BookImageProps) => {
   return (
     <Image
-      minW={width || "160px"}
-      minH={height || "240px"}
-      h={height || "160px"}
-      w={width || "240px"}
+      w={width || "100%"}
+      h={height || "auto"}
+      maxW="100%"
+      aspectRatio={2 / 3}
       objectFit={objectFit}
       objectPosition={objectPosition}
       src={book.book_image}
       alt={book.title}
       _hover={{
-        transform: "scale3d(1.04, 1.04, 1) translateX(5px)",
+        transform: "scale3d(1.04, 1.04, 1)",
         cursor: "pointer"
       }}
       transition={"transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)"}

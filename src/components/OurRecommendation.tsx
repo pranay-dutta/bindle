@@ -10,16 +10,21 @@ const OurRecommendation = () => {
 
   return (
     <Swiper
+      slidesPerView={2}
       breakpoints={{
-        1080: { slidesPerView: 7 }
+        480: { slidesPerView: 3, spaceBetween: 10 },
+        640: { slidesPerView: 4, spaceBetween: 10 },
+        768: { slidesPerView: 5, spaceBetween: 10 },
+        1024: { slidesPerView: 6, spaceBetween: 10 },
+        1280: { slidesPerView: 7, spaceBetween: 10 }
       }}
-      pagination={{ dynamicBullets: true }}
-      spaceBetween={10}
+      pagination={{ dynamicBullets: true, clickable: true }}
+      spaceBetween={8}
     >
       {data.books.map(
         (book, index) =>
           book.book_image && (
-            <SwiperSlide>
+            <SwiperSlide key={book.primary_isbn13 || book.title}>
               <BookCardVertical key={book.title} index={index} book={book} />
             </SwiperSlide>
           )

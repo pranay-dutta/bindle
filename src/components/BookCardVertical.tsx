@@ -1,6 +1,6 @@
 import type { NytBook } from "@/interfaces/new-york-times/NytBook";
 import { toKebabCase, toNormalCase } from "@/utils";
-import { Box, Button, Card, Flex, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import BookImage from "./BookImage";
 import Ticket from "./Ticket";
 import { useNavigate } from "react-router";
@@ -12,11 +12,10 @@ import useCartStore from "@/store/useCartStore";
 interface BookCardVerticalProps {
   book: NytBook;
   category?: ListNames;
-  index?: number;
 }
-const BookCardVertical = ({ book, index, category }: BookCardVerticalProps) => {
+const BookCardVertical = ({ book, category }: BookCardVerticalProps) => {
   const setNytBook = useNytBookStore((state) => state.setNytBook);
-  
+
   const addBook = useCartStore((s) => s.increaseQty);
   const removeBook = useCartStore((s) => s.decreaseQty);
 
@@ -32,54 +31,70 @@ const BookCardVertical = ({ book, index, category }: BookCardVerticalProps) => {
   };
 
   return (
-    <Card.Root maxW={"fit-content"} borderRadius="none" border="none" bg="inherit">
-      <Card.Body ps={index === 0 ? 0 : "initial"}>
-        <Flex gap={1} direction="column" alignItems="flex-start" justifyContent="space-between">
-          <Box position="relative">
-            <BookImage book={book} objectFit="fill" />
-            <Ticket text={text} colorPalette={text === "Popular" ? "red" : "green"} />
-          </Box>
-          <Box minH={24}>
-            <Card.Title cursor="pointer" textWrap="balance" lineClamp={2} onClick={handleClick}>
-              {toNormalCase(book.title)}
-            </Card.Title>
-            <Card.Description lineClamp={2}>{book.author}</Card.Description>
-          </Box>
-        </Flex>
-        <Flex justifyContent="space-between" alignItems="center" mt={3}>
-          <Text>$ {book.price}</Text>
+    <Box w="100%" borderRadius="none" border="none" bg="inherit">
+      <Flex
+        gap={1}
+        direction="column"
+        alignItems="flex-start"
+        justifyContent="space-between"
+        padding={2}
+      >
+        <Box position="relative" w="100%">
+          <BookImage book={book} objectFit="cover" />
+          <Ticket
+            text={text}
+            colorPalette={text === "Popular" ? "red" : "green"}
+          />
+        </Box>
+        <Box minH={20} w="100%">
+          <Heading
+            cursor="pointer"
+            textWrap="balance"
+            lineClamp={2}
+            fontSize={{ base: "sm", md: "md" }}
+            fontWeight={600}
+            onClick={handleClick}
+          >
+            {toNormalCase(book.title)}
+          </Heading>
+          <Text
+            lineClamp={1}
+            fontSize={{ base: "xs", md: "sm" }}
+            fontWeight={400}
+            color="gray.500"
+          >
+            {book.author}
+          </Text>
+        </Box>
+      </Flex>
+      <Flex
+        justifyContent="space-between"
+        alignItems="center"
+        mt={2}
+        px={2}
+        flexWrap="wrap"
+        gap={1}
+      >
+        <Text fontSize={{ base: "sm", md: "md" }} fontWeight={600}>
+          $ {book.price}
+        </Text>
 
-          {bookCount ? (
-            <>
-              <Button
-                onClick={() => {
-                  setBookCount(bookCount - 1);
-                  removeBook(book);
-                }}
-                size="xs"
-                colorPalette="orange"
-                variant="solid"
-                w="max-content"
-                borderRadius={0}
-              >
-                -
-              </Button>
-              {bookCount}
-              <Button
-                onClick={() => {
-                  setBookCount(bookCount + 1);
-                  addBook(book);
-                }}
-                size="xs"
-                colorPalette="orange"
-                variant="solid"
-                w="max-content"
-                borderRadius={0}
-              >
-                +
-              </Button>
-            </>
-          ) : (
+        {bookCount ? (
+          <>
+            <Button
+              onClick={() => {
+                setBookCount(bookCount - 1);
+                removeBook(book);
+              }}
+              size="xs"
+              colorPalette="orange"
+              variant="solid"
+              w="max-content"
+              borderRadius={0}
+            >
+              -
+            </Button>
+            {bookCount}
             <Button
               onClick={() => {
                 setBookCount(bookCount + 1);
@@ -91,12 +106,26 @@ const BookCardVertical = ({ book, index, category }: BookCardVerticalProps) => {
               w="max-content"
               borderRadius={0}
             >
-              Add to Cart
+              +
             </Button>
-          )}
-        </Flex>
-      </Card.Body>
-    </Card.Root>
+          </>
+        ) : (
+          <Button
+            onClick={() => {
+              setBookCount(bookCount + 1);
+              addBook(book);
+            }}
+            size="xs"
+            colorPalette="orange"
+            variant="solid"
+            w="max-content"
+            borderRadius={0}
+          >
+            Add to Cart
+          </Button>
+        )}
+      </Flex>
+    </Box>
   );
 };
 export default BookCardVertical;

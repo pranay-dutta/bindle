@@ -12,17 +12,21 @@ const AdSection = () => {
 
   return (
     <Swiper
+      slidesPerView={1}
       breakpoints={{
-        1080: { slidesPerView: 3 }
+        480: { slidesPerView: 1, spaceBetween: 10 },
+        640: { slidesPerView: 2, spaceBetween: 10 },
+        1024: { slidesPerView: 2, spaceBetween: 20 },
+        1280: { slidesPerView: 3, spaceBetween: 20 }
       }}
-      pagination={{ dynamicBullets: true }}
+      pagination={{ dynamicBullets: true, clickable: true }}
       spaceBetween={10}
       modules={[Pagination]}
     >
       {data.books.map(
         (book) =>
           book.book_image && (
-            <SwiperSlide>
+            <SwiperSlide key={book.primary_isbn13}>
               <Box py={10}>
                 <BookCardHorizontal book={book} />
               </Box>
