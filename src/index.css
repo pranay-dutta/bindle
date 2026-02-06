@@ -1,8 +1,22 @@
 :root {
   line-height: 1.5;
   font-weight: 400;
-  /* background: #f4f4f5; */
+  font-family: "Nunito", sans-serif;
 }
+
+body {
+  font-family: "Nunito", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Cormorant Garamond", serif;
+}
+
 .swiper-pagination-bullet-active {
   background: #ffffff !important;
 }
