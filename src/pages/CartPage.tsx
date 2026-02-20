@@ -17,6 +17,7 @@ import {
 import { FiTrash } from "react-icons/fi";
 import { useNavigate } from "react-router";
 import { MdOutlineEditNote } from "react-icons/md";
+import { getDefaultAddress } from "@/data/dummyaddresses";
 
 const CartPage = () => {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ const CartPage = () => {
     0
   );
   const cartItems = [...cart.keys()];
+  const defaultAddress = getDefaultAddress();
 
   return (
     <Box h={"65vh"}>
@@ -63,38 +65,61 @@ const CartPage = () => {
                 <Text truncate>
                   {getQty(book)} x {toNormalCase(book.title)}
                 </Text>
-                <Text textWrap="nowrap">
+                <Text
+                  textWrap="nowrap"
+                  color="orange.600"
+                  ms={10}
+                  fontWeight="medium"
+                >
                   $ {parseInt(book.price) * getQty(book)}
                 </Text>
               </Flex>
             ))}
           </Flex>
 
-          <Text fontSize="xl" fontWeight="bold" mb={4}>
-            Total: ${totalCartValue}
-          </Text>
+          <Box bg="blackAlpha.100/50" p={4}>
+            <Text fontSize="xl" fontWeight="bold" mb={4}>
+              Total: ${totalCartValue}
+            </Text>
 
-          <Box mb={4}>
-            <Flex justifyContent="space-between">
-              <Heading>Saved Address</Heading>
-              <Button
-                colorPalette="orange"
-                size="xs"
-                onClick={() => navigate("/checkout")}
-              >
-                <MdOutlineEditNote />
-                Edit
-              </Button>
-            </Flex>
+            <Box mb={4}>
+              <Flex justifyContent="space-between" mb={2}>
+                <Heading fontSize="lg">Saved Address</Heading>
+                <Button
+                  colorPalette="orange"
+                  size="xs"
+                  onClick={() => navigate("/checkout")}
+                >
+                  <MdOutlineEditNote />
+                  Edit
+                </Button>
+              </Flex>
 
-            <p>Pranay Dutta</p>
-            <p>8617436257</p>
-            <p>Subhasganj, Raiganj, U/D</p>
+              {defaultAddress ? (
+                <>
+                  <Text fontWeight="medium">{defaultAddress.name}</Text>
+                  <Text fontSize="sm">{defaultAddress.phone}</Text>
+                  <Text fontSize="sm">{defaultAddress.addressLine1}</Text>
+                  {defaultAddress.addressLine2 && (
+                    <Text fontSize="sm">{defaultAddress.addressLine2}</Text>
+                  )}
+                  <Text fontSize="sm">
+                    {defaultAddress.city}, {defaultAddress.state}{" "}
+                    {defaultAddress.zipCode}
+                  </Text>
+                  <Text fontSize="sm">{defaultAddress.country}</Text>
+                </>
+              ) : (
+                <Text fontSize="sm" color="gray.500">
+                  No saved address
+                </Text>
+              )}
+            </Box>
+
+            <Button bg="orange.500" w="full" onClick={() => alert("hi")}>
+              Order and pay {totalCartValue}
+            </Button>
           </Box>
-
-          <Button bg="orange.500" mt="auto">
-            Order and pay {totalCartValue}
-          </Button>
         </Flex>
       </Flex>
     </Box>

@@ -1,4 +1,4 @@
-import { getAllAddresses, type Address } from "@/data/addresses";
+import { getAllAddresses, type Address } from "@/data/dummyaddresses";
 import { Box, Button, Flex, Input, Text } from "@chakra-ui/react";
 import { useState } from "react";
 

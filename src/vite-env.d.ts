@@ -5,6 +5,7 @@ interface ImportMetaEnv {
   VITE_OPEN_LIB_URL: string;
   VITE_OPEN_LIB_COVERS_URL: string;
   VITE_IMG_FALLBACK_URL: string;
+  VITE_BACKEND_URL: string;
 }
 
 interface ImportMeta {
