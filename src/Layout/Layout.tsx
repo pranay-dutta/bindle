@@ -9,7 +9,7 @@ const Layout = () => {
     <>
       <Navbar />
       <NavOptions />
-      <Container maxW="10xl">
+      <Container maxWidth="10xl">
         <Outlet />
       </Container>
       <Footer />

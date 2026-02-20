@@ -8,7 +8,6 @@ import type { List } from "@/interfaces/new-york-times/List";
 interface VerticalBookSectionProps {
   list: List;
   heading: string;
-  height?: number;
 }
 const VerticalBookSection = ({ list, heading }: VerticalBookSectionProps) => {
   const books = list.books;
@@ -22,7 +21,7 @@ const VerticalBookSection = ({ list, heading }: VerticalBookSectionProps) => {
         direction="vertical"
         modules={[Scrollbar]}
         scrollbar={{ draggable: true }}
-        style={{ height: "870px" }}
+        style={{ maxHeight: "860px" }}
         slidesPerView="auto"
         spaceBetween={16}
       >

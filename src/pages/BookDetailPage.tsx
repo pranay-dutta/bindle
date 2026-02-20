@@ -4,7 +4,16 @@ import useOpenLibBook from "@/hooks/open-library/useOpenLibBook";
 import useOpenLibWork from "@/hooks/open-library/useOpenLibWork";
 import useNytBookStore from "@/store/useNytBookStore";
 import { extractWorkDescription, toNormalCase } from "@/utils";
-import { Box, Button, Flex, Heading, Image, Quote, Strong, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Image,
+  Quote,
+  Strong,
+  Text
+} from "@chakra-ui/react";
 import { BiBook } from "react-icons/bi";
 
 const BookDetailPage = () => {
@@ -23,7 +32,12 @@ const BookDetailPage = () => {
       <Flex my={5} gap={8} alignItems="flex-start">
         <Flex gap={2} direction="column">
           <Box height={height} width={width}>
-            <Image height="100%" width="100%" objectFit="fill" src={nytBook.book_image} />
+            <Image
+              height="100%"
+              width="100%"
+              objectFit="fill"
+              src={nytBook.book_image}
+            />
           </Box>
           <Button bg="gray.500" color="white" variant="solid">
             {CURRENCY_SYMBOL} 123 only
@@ -37,7 +51,7 @@ const BookDetailPage = () => {
         <Flex direction="column" gap={4} w="100%">
           {/* Book name and author */}
           <Box>
-            <Heading fontFamily="inherit">{toNormalCase(nytBook.title)}</Heading>
+            <Heading>{toNormalCase(nytBook.title)}</Heading>
             <Text color="gray.600">{nytBook.author}</Text>
           </Box>
 
@@ -60,7 +74,8 @@ const BookDetailPage = () => {
           {/* Book description */}
           <Box>
             <Text>
-              {extractWorkDescription(openLibWork) || (openLibBook && openLibBook.description?.value)}
+              {extractWorkDescription(openLibWork) ||
+                (openLibBook && openLibBook.description?.value)}
             </Text>
           </Box>
 

@@ -15,8 +15,12 @@ const Pagination = ({ totalCount, pageSize }: Props) => {
 
   return (
     <>
-      <ChakraPagination.Root count={totalCount} pageSize={pageSize} page={currentPage}>
-        <ButtonGroup variant="ghost" size="sm">
+      <ChakraPagination.Root
+        count={totalCount}
+        pageSize={pageSize}
+        page={currentPage}
+      >
+        <ButtonGroup variant="ghost" size={{ base: "xs", md: "sm" }}>
           <ChakraPagination.PrevTrigger
             onClick={() =>
               setSearchParams((searchParams) => {

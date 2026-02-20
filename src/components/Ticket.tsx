@@ -16,9 +16,8 @@ const Ticket = ({ colorPalette, text }: TicketProps) => {
       variant="solid"
       size="sm"
       position="absolute"
-      transform={"rotate(45deg)"}
       top={2}
-      right={-4}
+      right={-2}
       px={3}
     >
       {text}

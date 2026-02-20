@@ -10,8 +10,12 @@ import { Box, Container, Flex, Heading } from "@chakra-ui/react";
 import { BsStars } from "react-icons/bs";
 
 const Homepage = () => {
-  const { data: childrenBooks } = useNytBookList("childrens-middle-grade-hardcover");
-  const { data: selfDevelopmentBooks } = useNytBookList("advice-how-to-and-miscellaneous");
+  const { data: childrenBooks } = useNytBookList(
+    "childrens-middle-grade-hardcover"
+  );
+  const { data: selfDevelopmentBooks } = useNytBookList(
+    "advice-how-to-and-miscellaneous"
+  );
   const { data: seriesBooks } = useNytBookList("series-books");
 
   if (!childrenBooks || !seriesBooks || !selfDevelopmentBooks) return null;
@@ -21,7 +25,7 @@ const Homepage = () => {
       <Navbar />
       <NavOptions />
       {/* Top Ad Section */}
-      <Box bg="gray.800" p={5}>
+      <Box bg="gray.800" p={{ base: 0, md: 5 }}>
         <Container>
           <AdSection />
         </Container>
@@ -32,27 +36,58 @@ const Homepage = () => {
         <Container>
           <Heading textAlign="center" pt={8} pb={4}>
             Our Recommendation
-            <BsStars style={{ display: "inline", marginLeft: "4px", color: "orangered" }} />
+            <BsStars
+              style={{
+                display: "inline",
+                marginLeft: "4px",
+                color: "orangered"
+              }}
+            />
           </Heading>
           <OurRecommendation />
         </Container>
       </Box>
 
       {/* Book Categories Section */}
-      <Box bg="gray.100" p={5}>
-        <Container as={Flex} gap={2}>
-          <Container bg="gray.100" as={Flex} flexDirection="column" gap={2} maxW="70%" ms={0} p={0}>
-            <BookCategorySection list={childrenBooks.data} heading={"For Little Readers"} />
-            <BookCategorySection list={selfDevelopmentBooks.data} heading={"Self Development"} />
+      <Box bg="gray.100" p={{ base: 0, md: 5 }}>
+        <Container
+          p={{ base: 2, md: 0 }}
+          gap={2}
+          as={Flex}
+          flexDirection={{ base: "column", md: "row" }}
+        >
+          <Container
+            m={0}
+            p={0}
+            gap={2}
+            bg="gray.100"
+            as={Flex}
+            flexDirection="column"
+            maxW={{ base: "full", md: "60%", lg: "70%" }}
+          >
+            <BookCategorySection
+              list={childrenBooks.data}
+              heading={"For Little Readers"}
+            />
+            <BookCategorySection
+              list={selfDevelopmentBooks.data}
+              heading={"Self Development"}
+            />
           </Container>
-          <Container maxW="2xl" p={0} ms={0} bg="white">
+          <Container
+            p={0}
+            ms={0}
+            bg="white"
+            flex={1}
+            maxW={{ base: "full", md: "40%", lg: "30%" }}
+          >
             <VerticalBookSection list={seriesBooks.data} heading={"Series"} />
           </Container>
         </Container>
       </Box>
 
       {/* Footer Section */}
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

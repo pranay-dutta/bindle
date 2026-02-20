@@ -1,4 +1,12 @@
-import { Box, Button, Flex, Grid, Heading, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Text,
+  Flex,
+  Grid,
+  Heading,
+  Stack
+} from "@chakra-ui/react";
 
 import OpenLibBook from "@/components/open-library/OpenLibBook";
 import type { Subject } from "@/data/open-library-subjects";
@@ -26,7 +34,10 @@ const CategoryPage = () => {
 
   const page = parseInt(searchParams.get("page") || "1") - 1; // Zero-based index
 
-  const { data, isLoading, isError } = useOpenLibSubjectList(category as Subject, page);
+  const { data, isLoading, isError } = useOpenLibSubjectList(
+    category as Subject,
+    page
+  );
   const navigate = useNavigate();
   const workCount = useRef(0);
 
@@ -38,8 +49,8 @@ const CategoryPage = () => {
   if (isError) return <div>Error loading data</div>;
 
   return (
-    <Box my={3}>
-      <Heading my={6} display="block" fontSize="3xl">
+    <Box px={{ base: 0, md: 6 }} py={4}>
+      <Heading my={6} display="block" fontSize={{ base: "2xl", md: "3xl" }}>
         {category} Books
       </Heading>
 
@@ -50,6 +61,7 @@ const CategoryPage = () => {
             key={subject}
             rounded="none"
             colorPalette="orange"
+            size={{ base: "xs", sm: "sm", md: "md" }}
             variant={category === subject ? "solid" : "subtle"}
             onClick={() => navigate(`/categories/${subject}`)}
           >
@@ -59,26 +71,59 @@ const CategoryPage = () => {
         <Button
           colorPalette="orange"
           variant="ghost"
+          size={{ base: "xs", sm: "sm", md: "md" }}
           onClick={() => setSubjectLen(subjectLen <= 10 ? 20 : 10)}
         >
           {subjectLen <= 10 ? <TfiMoreAlt /> : <TfiMore />}
         </Button>
       </Flex>
-      {/* Left Options window and Grid to show the books*/}
-      <Flex borderTop="1px solid gray" pt={2}>
-        <Box width="200px" mr={4}>
+
+      {/* Left Options window and Grid to show the books */}
+      <Flex
+        flexDirection={{ base: "column", md: "row" }}
+        borderTop="1px solid"
+        borderColor="gray.300"
+        pt={4}
+        gap={{ base: 4, md: 6 }}
+        alignItems="flex-start"
+      >
+        {/* Sidebar */}
+        <Box
+          w={{ base: "full", md: "220px", lg: "250px" }}
+          flexShrink={0}
+          position={{ md: "sticky" }}
+          top={{ md: "20px" }}
+        >
           <LeftWindow />
         </Box>
-        {
-          <Grid alignContent="start" templateColumns="repeat(6, 1fr)" gap={4}>
+
+        {/* Books grid */}
+        <Box flex={1}>
+          <Grid
+            alignContent="start"
+            templateColumns={{
+              base: "repeat(2, 1fr)",
+              sm: "repeat(3, 1fr)",
+              md: "repeat(2, 1fr)",
+              lg: "repeat(4, 1fr)",
+              xl: "repeat(5, 1fr)"
+            }}
+            gap={{ base: 2, md: 4, lg: 5 }}
+          >
             {isLoading
-              ? Array.from({ length: PAGE_SIZE }, (_, index) => <OpenLibBookSkeleton key={index} />)
-              : data?.works.map((book) => <OpenLibBook key={book.key} openLibBook={book} />)}
+              ? Array.from({ length: PAGE_SIZE }, (_, index) => (
+                  <OpenLibBookSkeleton key={index} />
+                ))
+              : data?.works.map((book) => (
+                  <OpenLibBook key={book.key} openLibBook={book} />
+                ))}
           </Grid>
-        }
+
+          {/* Pagination Component */}
+        </Box>
       </Flex>
-      {/* Pagination Component */}
-      <Box mx="auto" mt={5} w="fit-content">
+
+      <Box mx="auto" mt={8} w="fit-content">
         <Pagination pageSize={PAGE_SIZE} totalCount={workCount.current} />
       </Box>
     </Box>
@@ -93,7 +138,14 @@ const LeftWindow = () => {
   const { reset: languageReset } = useCheckbox("language");
 
   return (
-    <Stack borderRight={"1px solid gray"} pr={2}>
+    <Stack
+      borderRight={{ base: "none", md: "1px solid" }}
+      borderBottom={{ base: "1px solid", md: "none" }}
+      borderColor="gray.300"
+      pr={{ base: 0, md: 4 }}
+      pb={{ base: 4, md: 0 }}
+      gap={4}
+    >
       <Checkbox
         key={sortOptions.id}
         options={sortOptions.options}
@@ -101,7 +153,9 @@ const LeftWindow = () => {
         heading="Select Sort Option"
         singleCheck
       />
-      <Heading fontSize="sm">Select Date Range</Heading>
+      <Text my={2} fontSize="sm">
+        Select Date Range
+      </Text>
       <DateRange />
       <Checkbox
         key={ebookOptions.id}
@@ -110,7 +164,6 @@ const LeftWindow = () => {
         heading="Select E-Book Option"
         singleCheck
       />
-
       {/* Reset filters */}
       <Button
         colorPalette="orange"
@@ -127,22 +180,23 @@ const LeftWindow = () => {
   );
 };
 
-const languageOptions: { id: number; heading: string; options: OptionType[] } = {
-  id: 1,
-  heading: "Select Language",
-  options: [
-    { label: "English", value: "english" },
-    { label: "Spanish", value: "spanish" },
-    { label: "French", value: "french" },
-    { label: "German", value: "german" },
-    { label: "Dutch", value: "dutch" },
-    { label: "Polish", value: "polish" },
-    { label: "Chinese", value: "chinese" },
-    { label: "Russian", value: "russian" },
-    { label: "Italian", value: "italian" },
-    { label: "Portuguese", value: "portuguese" }
-  ]
-};
+const languageOptions: { id: number; heading: string; options: OptionType[] } =
+  {
+    id: 1,
+    heading: "Select Language",
+    options: [
+      { label: "English", value: "english" },
+      { label: "Spanish", value: "spanish" },
+      { label: "French", value: "french" },
+      { label: "German", value: "german" },
+      { label: "Dutch", value: "dutch" },
+      { label: "Polish", value: "polish" },
+      { label: "Chinese", value: "chinese" },
+      { label: "Russian", value: "russian" },
+      { label: "Italian", value: "italian" },
+      { label: "Portuguese", value: "portuguese" }
+    ]
+  };
 const sortOptions: { id: number; heading: string; options: OptionType[] } = {
   id: 2,
   heading: "Sort By",
