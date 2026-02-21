@@ -1,7 +1,14 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, Group } from "@chakra-ui/react";
 import StoreTitle from "./StoreTitle";
 import SearchInput from "./SearchInput";
 import CartButton from "./CartButton";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignUpButton,
+  UserButton
+} from "@clerk/clerk-react";
 
 const Navbar = () => {
   return (
@@ -15,7 +22,18 @@ const Navbar = () => {
     >
       <StoreTitle />
       <SearchInput />
-      <CartButton />
+      <Group gap={5}>
+        <CartButton />
+        {/* Show the sign-in and sign-up buttons when the user is signed out */}
+        <SignedOut>
+          <SignInButton />
+          <SignUpButton />
+        </SignedOut>
+        {/* Show the user button when the user is signed in */}
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+      </Group>
     </Flex>
   );
 };
