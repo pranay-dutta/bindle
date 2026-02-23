@@ -48,7 +48,7 @@ model Sale {
 
 //User model
 model User {
-  id        Int       @id @default(autoincrement())
+  id        String    @id
   email     String    @unique
   fullName  String    @db.VarChar(255)
   orders    Order[]   //orders of an user(one user can have multiple orders)
@@ -57,16 +57,16 @@ model User {
 
 //Order model
 model Order {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(cuid())
   bookTitle String   @db.VarChar(255)
-  orderDate DateTime @db.DateTime
-  userId    Int
+  orderDate DateTime @default(now())
+  userId    String
   user      User?    @relation(fields: [userId], references: [id])
 }
 
 //Address model
 model Address {
-  id           Int    @id
+  id           String @id @default(cuid())
   fullName     String @db.VarChar(255)
   mobileNumber String @db.VarChar(15)
   addressLine1 String @db.VarChar(255)
@@ -75,6 +75,6 @@ model Address {
   state        String @db.VarChar(255)
   postalCode   String @db.VarChar(20)
   country      String @db.VarChar(255)
-  userId       Int
+  userId       String
   user         User?  @relation(fields: [userId], references: [id])
 }
