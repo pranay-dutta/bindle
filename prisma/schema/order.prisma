@@ -1,0 +1,18 @@
+model Order {
+  id         String      @id @default(cuid())
+  createdAt  DateTime    @default(now())
+  totalPrice Int         @db.Int
+  userId     String
+  user       User?       @relation(fields: [userId], references: [id])
+  orderItems OrderItem[]
+}
+
+model OrderItem {
+  id        String @id @default(cuid())
+  bookTitle String @db.VarChar(255)
+  quantity  Int    @db.Int
+  price     Int    @db.Int
+  image     String @db.VarChar(255)
+  orderId   String
+  order     Order? @relation(fields: [orderId], references: [id])
+}
