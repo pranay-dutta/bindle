@@ -1,0 +1,9 @@
+model Sale {
+  title       String @id
+  author      String @db.VarChar(255)
+  bookImage   String @db.VarChar(255)
+  salePercent Float  @db.Float
+  isbn10      String @db.VarChar(255)
+  isbn13      String @db.VarChar(255)
+  price       Int    @db.Int
+}

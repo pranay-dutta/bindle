@@ -1,0 +1,21 @@
+//Single Book model, related to BookList
+model Book {
+  title            String    @id
+  author           String    @db.VarChar(255)
+  amazonProductUrl String    @db.VarChar(255)
+  bookImage        String    @db.VarChar(255)
+  description      String    @db.Text
+  price            Int       @db.Int
+  primaryIsbn10    String    @db.VarChar(255)
+  primaryIsbn13    String    @db.VarChar(255)
+  listId           Int?
+  bookList         BookList? @relation(fields: [listId], references: [id])
+}
+
+//BookList model
+model BookList {
+  id              Int    @id
+  listName        String
+  listNameEncoded String
+  books           Book[]
+}
