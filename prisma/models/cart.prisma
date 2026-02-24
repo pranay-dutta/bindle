@@ -1,15 +1,17 @@
 model Cart {
-  id        String   @id @default(cuid())
-  userId    String
-  items     CartItem[]
-  user      User?    @relation(fields: [userId], references: [id])
+  id     String     @id @default(cuid())
+  userId String     @unique
+  items  CartItem[]
+  user   User       @relation(fields: [userId], references: [id])
 }
 
 //Single item in the cart, related to Cart
 model CartItem {
-  id        String   @id @default(cuid())
+  id        String @id @default(cuid())
   cartId    String
-  cart      Cart?    @relation(fields: [cartId], references: [id])
-  bookTitle String   @db.VarChar(255)
-  quantity  Int      @db.Int
+  cart      Cart   @relation(fields: [cartId], references: [id])
+  bookTitle String @db.VarChar(255)
+  quantity  Int    @db.Int
+
+  @@unique([cartId, bookTitle]) // prevent duplicate books
 }
