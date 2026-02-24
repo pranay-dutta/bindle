@@ -20,5 +20,5 @@ model Address {
   postalCode   String @db.VarChar(20)
   country      String @db.VarChar(255)
   userId       String
-  user         User?  @relation(fields: [userId], references: [id])
+  user         User   @relation(fields: [userId], references: [id])
 }
