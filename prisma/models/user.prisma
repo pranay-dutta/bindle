@@ -5,7 +5,7 @@ model User {
   fullName  String    @db.VarChar(255)
   orders    Order[]
   addresses Address[]
-  cart      Cart[]
+  cart      Cart?
 }
 
 //Address of an user, related to User
