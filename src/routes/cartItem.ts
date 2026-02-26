@@ -22,7 +22,7 @@ router.put("/:itemId", requireAuth, async (req, res) => {
 })
 
 //Delete a single cart item
-router.delete("/item/:itemId", requireAuth, async (req, res) => {
+router.delete("/:itemId", requireAuth, async (req, res) => {
   const { itemId } = req.params
 
   await prisma.cartItem.delete({
@@ -33,9 +33,8 @@ router.delete("/item/:itemId", requireAuth, async (req, res) => {
 })
 
 //Create a single cart item
-router.post("/", requireAuth, async (req, res) => {
+router.post("/create", requireAuth, async (req, res) => {
   const userId = req.user.sub
-  if (!userId) return res.status(401).json({ error: "Unauthorized" })
 
   //Create of fetch cart of current user
   const cart = await prisma.cart.upsert({
@@ -64,3 +63,5 @@ router.post("/", requireAuth, async (req, res) => {
   }
   res.status(201).json({ message: "Item added to cart" })
 })
+
+export default router

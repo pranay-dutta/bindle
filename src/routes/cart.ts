@@ -4,24 +4,14 @@ import { prisma } from "../../lib/prisma"
 
 const router = Router()
 
-router.post("/create", requireAuth, async (req, res) => {
-  const userId = req.user.sub //user id always exists because requireAuth middleware is used
-
-  const cart = await prisma.cart.upsert({
-    where: { userId },
-    create: { userId },
-    update: {}
-  })
-
-  res.status(201).json({ message: "Cart created successfully", cart })
-})
-
-router.get("/", requireAuth, async (req, res) => {
+router.get("/create", requireAuth, async (req, res) => {
   const userId = req.user.sub
 
-  // Fetch cart items for the user from the database
-  const cartItems = await prisma.cart.findFirst({
+  // Upsert the cart for the user, creating it if it doesn't exist and including the cart items in the response
+  const cartItems = await prisma.cart.upsert({
     where: { userId },
+    create: { userId },
+    update: {},
     include: {
       items: true
     }
