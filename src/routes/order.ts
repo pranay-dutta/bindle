@@ -4,6 +4,19 @@ import { prisma } from "../../lib/prisma"
 
 const router = Router()
 
+router.get("/getall", requireAuth, async (req, res) => {
+  const userId = req.user.sub
+
+  // Fetch orders for the authenticated user
+  const orders = await prisma.order.findMany({
+    where: { userId },
+    include: {
+      orderItems: true
+    }
+  })
+  res.status(200).json({ orders })
+})
+
 router.post("/create", requireAuth, async (req, res) => {
   const userId = req.user.sub
   const orders = req.body
