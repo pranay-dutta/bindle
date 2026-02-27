@@ -1,4 +1,4 @@
-import requireAuth from "@/middlewares/requireAuth"
+import requireAuth from "../middlewares/requireAuth"
 import { Router } from "express"
 import { prisma } from "../../lib/prisma"
 

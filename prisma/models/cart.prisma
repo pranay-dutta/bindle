@@ -11,6 +11,8 @@ model CartItem {
   cartId    String
   cart      Cart   @relation(fields: [cartId], references: [id])
   bookTitle String @db.VarChar(255)
+  price     Int    @db.Int
+  image     String @db.VarChar(255)
   quantity  Int    @db.Int
 
   @@unique([cartId, bookTitle]) // prevent duplicate books

@@ -1,4 +1,4 @@
-import requireAuth from "@/middlewares/requireAuth"
+import requireAuth from "../middlewares/requireAuth"
 import { Router } from "express"
 import { prisma } from "../../lib/prisma"
 
@@ -44,7 +44,7 @@ router.post("/create", requireAuth, async (req, res) => {
   })
 
   const existingItem = await prisma.cartItem.findFirst({
-    where: { cartId: cart.id, bookId: req.body.bookTitle }
+    where: { cartId: cart.id, bookTitle: req.body.bookTitle }
   })
 
   if (existingItem) {
@@ -57,6 +57,8 @@ router.post("/create", requireAuth, async (req, res) => {
       data: {
         cartId: cart.id,
         bookTitle: req.body.bookTitle,
+        image: req.body.image,
+        price: req.body.price,
         quantity: 1
       }
     })
