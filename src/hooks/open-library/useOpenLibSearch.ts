@@ -1,14 +1,21 @@
-import createOpenLibClient from "@/services/openLibClient";
+import createOpenLibClient from "@/services/clients/openLibClient";
 import { useQuery } from "@tanstack/react-query";
 import type { SearchData } from "@/interfaces/open-library/OLSearch";
 import ms from "ms";
 
-const useOpenLibSearch = (searchTerm: string | null, currentPage: number, pageSize: number) => {
+const useOpenLibSearch = (
+  searchTerm: string | null,
+  currentPage: number,
+  pageSize: number
+) => {
   const olClient = createOpenLibClient<SearchData>("/search.json");
 
   return useQuery<SearchData>({
     queryKey: [searchTerm, currentPage],
-    queryFn: () => olClient.get({ params: { page: currentPage, q: searchTerm, limit: pageSize } }),
+    queryFn: () =>
+      olClient.get({
+        params: { page: currentPage, q: searchTerm, limit: pageSize }
+      }),
     refetchOnWindowFocus: false,
     staleTime: ms("2h"),
     retry: 1,

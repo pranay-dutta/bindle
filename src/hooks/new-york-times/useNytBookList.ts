@@ -1,6 +1,6 @@
 import type { List } from "@/interfaces/new-york-times/List";
 import type { ListNames } from "@/interfaces/new-york-times/ListNames";
-import createBackendClient from "@/services/backendClient";
+import createBackendClient from "@/services/clients/backendClient";
 // import createNytClient from "@/services/nytClient";
 import { useQuery } from "@tanstack/react-query";
 import ms from "ms";

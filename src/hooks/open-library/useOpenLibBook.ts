@@ -1,5 +1,5 @@
 import type { OLBook } from "@/interfaces/open-library/OLBook";
-import createOpenLibClient from "@/services/openLibClient";
+import createOpenLibClient from "@/services/clients/openLibClient";
 import useNytBookStore from "@/store/useNytBookStore";
 import { useQuery } from "@tanstack/react-query";
 import ms from "ms";

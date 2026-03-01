@@ -1,5 +1,5 @@
 import type { OLWork } from "@/interfaces/open-library/OLWork";
-import createOpenLibClient from "@/services/openLibClient";
+import createOpenLibClient from "@/services/clients/openLibClient";
 import { useQuery } from "@tanstack/react-query";
 import ms from "ms";
 import useOpenLibBook from "./useOpenLibBook";
