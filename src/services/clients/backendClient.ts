@@ -16,8 +16,19 @@ class BackendClient<T> {
   get = async (params?: AxiosRequestConfig) => {
     return client.get<T>(this.endpoint, params).then((res) => res.data);
   };
+  post = async (data: T, config?: AxiosRequestConfig) => {
+    return client.post(this.endpoint, data, config).then((res) => res.data);
+  };
+  patch = async (data: T, config?: AxiosRequestConfig) => {
+    return client.patch(this.endpoint, data, config).then((res) => res.data);
+  };
+  delete = async (config?: AxiosRequestConfig) => {
+    return client.delete(this.endpoint, config).then((res) => res.data);
+  };
   getNytAll = async () => {
-    return client.get<FetchResponse<T>>(this.endpoint).then((res) => res.data.results);
+    return client
+      .get<FetchResponse<T>>(this.endpoint)
+      .then((res) => res.data.results);
   };
 }
 const createBackendClient = <T>(endpoint: string) => {
