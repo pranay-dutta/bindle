@@ -21,23 +21,26 @@ export const openLibKeyToWorkId = (key: string | undefined) => {
   return match ? match[1] : null;
 };
 
-export const extractWorkDescription = (work: OLWork | undefined): string | null => {
+export const extractWorkDescription = (
+  work: OLWork | undefined
+): string | null => {
   if (!work) return null;
 
   if (!work.description) return null;
   if (typeof work.description === "string") return work.description;
-  if (typeof work.description === "object" && "value" in work.description) return work.description.value;
+  if (typeof work.description === "object" && "value" in work.description)
+    return work.description.value;
 
   return null;
 };
 
 export const getOLCoverUrls = (coverId: number | null) => {
-  if (!coverId) return [""];
+  if (!coverId) return [];
 
   return [
     `${VITE_OPEN_LIB_COVERS_URL}${coverId}-M.jpg`,
     `${VITE_OPEN_LIB_COVERS_URL}${coverId}-L.jpg`,
-    `${VITE_OPEN_LIB_COVERS_URL}${coverId}-S.jpg`,
+    `${VITE_OPEN_LIB_COVERS_URL}${coverId}-S.jpg`
   ];
 };
 

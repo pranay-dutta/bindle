@@ -16,7 +16,10 @@ import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import { useState } from "react";
 import useImageFallback from "@/hooks/useImageFallback";
 import { getOLCoverUrls } from "@/utils";
-import type { SearchData, SearchedBook } from "@/interfaces/open-library/OLSearch";
+import type {
+  SearchData,
+  SearchedBook
+} from "@/interfaces/open-library/OLSearch";
 import useCartStore from "@/store/useCartStore";
 
 const SearchResultsPage = () => {
@@ -63,7 +66,13 @@ const SearchResultsPage = () => {
         <BookGrid data={data} />
       </Box>
 
-      <Pagination.Root page={currentPage} count={totalResults} pageSize={pageSize} defaultPage={1} my={5}>
+      <Pagination.Root
+        page={currentPage}
+        count={totalResults}
+        pageSize={pageSize}
+        defaultPage={1}
+        my={5}
+      >
         <ButtonGroup variant="ghost" size="md">
           <Pagination.PrevTrigger
             asChild
@@ -106,16 +115,21 @@ export default SearchResultsPage;
 const BookGrid = ({ data }: { data: SearchData }) => {
   return (
     <Grid templateColumns="repeat(auto-fill, minmax(200px, 1fr))" gap={4} p={2}>
-      {data.docs.map((book) => (
-        <div key={book.key}>
-          <BookCard book={book} />
-        </div>
-      ))}
+      {data.docs.map((book) => {
+        const urls = getOLCoverUrls(book.cover_i || 0);
+        if (urls.length === 0) return null;
+        
+        return (
+          <div key={book.key}>
+            <BookCard book={book} urls={urls} />
+          </div>
+        );
+      })}
     </Grid>
   );
 };
 
-const BookCard = ({ book }: { book: SearchedBook }) => {
+const BookCard = ({ book, urls }: { book: SearchedBook; urls: string[] }) => {
   const [bookCount, setBookCount] = useState(0);
   const addBook = useCartStore((s) => s.increaseQty);
   const removeBook = useCartStore((s) => s.decreaseQty);
@@ -124,7 +138,6 @@ const BookCard = ({ book }: { book: SearchedBook }) => {
   const height = 300;
 
   const [isLoaded, setIsLoaded] = useState(false);
-  const urls = getOLCoverUrls(book.cover_i || 0);
   const { src, onError } = useImageFallback(urls);
 
   return (

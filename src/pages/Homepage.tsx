@@ -1,8 +1,5 @@
 import AdSection from "@/components/AdSection";
 import BookCategorySection from "@/components/BookCategorySection";
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
-import NavOptions from "@/components/NavOptions";
 import OurRecommendation from "@/components/OurRecommendation";
 import VerticalBookSection from "@/components/VerticalBookSection";
 import useNytBookList from "@/hooks/new-york-times/useNytBookList";
@@ -10,20 +7,13 @@ import { Box, Container, Flex, Heading } from "@chakra-ui/react";
 import { BsStars } from "react-icons/bs";
 
 const Homepage = () => {
-  const { data: childrenBooks } = useNytBookList(
-    "childrens-middle-grade-hardcover"
-  );
-  const { data: selfDevelopmentBooks } = useNytBookList(
-    "advice-how-to-and-miscellaneous"
-  );
+  const { data: childrenBooks } = useNytBookList( "childrens-middle-grade-hardcover");
+  const { data: selfDevelopmentBooks } = useNytBookList( "advice-how-to-and-miscellaneous");
   const { data: seriesBooks } = useNytBookList("series-books");
-
   if (!childrenBooks || !seriesBooks || !selfDevelopmentBooks) return null;
 
   return (
     <>
-      <Navbar />
-      <NavOptions />
       {/* Top Ad Section */}
       <Box bg="gray.800" p={{ base: 0, md: 5 }}>
         <Container>
@@ -85,9 +75,6 @@ const Homepage = () => {
           </Container>
         </Container>
       </Box>
-
-      {/* Footer Section */}
-      {/* <Footer /> */}
     </>
   );
 };

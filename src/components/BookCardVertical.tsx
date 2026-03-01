@@ -6,8 +6,9 @@ import Ticket from "./Ticket";
 import { useNavigate } from "react-router";
 import type { ListNames } from "@/interfaces/new-york-times/ListNames";
 import useNytBookStore from "@/store/useNytBookStore";
-import { useState } from "react";
 import useCartStore from "@/store/useCartStore";
+import useCartItemRoutes from "@/hooks/useCartItemRoutes";
+import { useState } from "react";
 
 interface BookCardVerticalProps {
   book: NytBook;
@@ -15,14 +16,19 @@ interface BookCardVerticalProps {
 }
 const BookCardVertical = ({ book, category }: BookCardVerticalProps) => {
   const setNytBook = useNytBookStore((state) => state.setNytBook);
+  const [isAdded, setIsAdded] = useState(false);
 
-  const addBook = useCartStore((s) => s.increaseQty);
-  const removeBook = useCartStore((s) => s.decreaseQty);
+  const addBook = useCartStore((s) => s.addToCart);
+  const { addToCart } = useCartItemRoutes();
 
   const navigate = useNavigate();
-
-  const [bookCount, setBookCount] = useState(0);
   const text = book.weeks_on_list > 5 ? "Popular" : "New";
+
+  const onAddToCart = async () => {
+    addBook(book);
+    addToCart(book);
+    setIsAdded(true);
+  };
 
   const handleClick = () => {
     const title = toKebabCase(book.title);
@@ -79,51 +85,16 @@ const BookCardVertical = ({ book, category }: BookCardVerticalProps) => {
           $ {book.price}
         </Text>
 
-        {bookCount ? (
-          <>
-            <Button
-              onClick={() => {
-                setBookCount(bookCount - 1);
-                removeBook(book);
-              }}
-              size="xs"
-              colorPalette="orange"
-              variant="solid"
-              w="max-content"
-              borderRadius={0}
-            >
-              -
-            </Button>
-            {bookCount}
-            <Button
-              onClick={() => {
-                setBookCount(bookCount + 1);
-                addBook(book);
-              }}
-              size="xs"
-              colorPalette="orange"
-              variant="solid"
-              w="max-content"
-              borderRadius={0}
-            >
-              +
-            </Button>
-          </>
-        ) : (
-          <Button
-            onClick={() => {
-              setBookCount(bookCount + 1);
-              addBook(book);
-            }}
-            size="xs"
-            colorPalette="orange"
-            variant="solid"
-            w="max-content"
-            borderRadius={0}
-          >
-            Add to Cart
-          </Button>
-        )}
+        <Button
+          onClick={async () => await onAddToCart()}
+          size="xs"
+          colorPalette="orange"
+          variant={isAdded ? "solid" : "outline"}
+          w="max-content"
+          borderRadius={0}
+        >
+          {isAdded ? "Added to Cart" : "Add to Cart"}
+        </Button>
       </Flex>
     </Box>
   );
