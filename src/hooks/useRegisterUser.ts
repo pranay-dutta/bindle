@@ -1,33 +1,29 @@
-import { useEffect, useMemo } from "react";
-import { useAuth, useUser } from "@clerk/clerk-react";
-import createBackendClient from "@/services/clients/backendClient";
+import { useMutation } from "@tanstack/react-query";
+import useAuthorizedBackendClient from "./useAuthorizedBackendClient";
 
+interface RegisterUserResponse {
+  message: string;
+  user: {
+    id: string;
+    email: string;
+    fullName: string;
+  };
+}
 const useRegisterUser = () => {
-  const { isSignedIn } = useUser();
-  const { getToken } = useAuth();
+  const authorizedClient = useAuthorizedBackendClient();
 
-  // Memoize backend client to avoid unnecessary re-renders and API calls
-  const backendClient = useMemo(
-    () => createBackendClient("/user/register"),
-    []
-  );
+  //method to register a new user in the backend
+  const registerUser = async () => {
+    const backendClient =
+      await authorizedClient<RegisterUserResponse>("/user/register");
+    return await backendClient.post();
+  };
 
-  useEffect(() => {
-    const syncUser = async () => {
-      if (!isSignedIn) return;
-
-      try {
-        const token = await getToken({ template: "bindle-token" });
-        await backendClient.post(null, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-      } catch (err) {
-        console.error("User sync failed", err);
-      }
-    };
-
-    syncUser();
-  }, [isSignedIn, backendClient, getToken]);
+  return useMutation<RegisterUserResponse>({
+    mutationKey: ["register-user"],
+    mutationFn: registerUser,
+    retry: false
+  });
 };
 
 export default useRegisterUser;
