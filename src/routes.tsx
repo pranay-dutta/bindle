@@ -12,7 +12,8 @@ import {
   NewReleasePage,
   RecommendationPage,
   SalePage,
-  SearchResultsPage
+  SearchResultsPage,
+  OrdersPage
 } from "./pages";
 
 const router = createBrowserRouter([
@@ -36,7 +37,8 @@ const router = createBrowserRouter([
           { path: "new-releases", element: <NewReleasePage /> },
           { path: "ebooks", element: <EbookPage /> },
           { path: "addresses", element: <Addresses /> },
-          { path: "sale", element: <SalePage /> }
+          { path: "sale", element: <SalePage /> },
+          { path: "orders", element: <OrdersPage /> }
         ]
       }
     ]
