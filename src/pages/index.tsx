@@ -9,3 +9,4 @@ export { default as NewReleasePage } from "./NewReleasePage";
 export { default as EbookPage } from "./EbookPage";
 export { default as SalePage } from "./SalePage";
 export { default as CategoryPage } from "./CategoryPage";
+export { default as OrdersPage } from "./OrdersPage";
