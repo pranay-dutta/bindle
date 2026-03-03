@@ -15,7 +15,8 @@ router.get("/getall", async (req, res) => {
     where: { userId: user.id },
     include: {
       orderItems: true
-    }
+    },
+    orderBy: { createdAt: "desc" }
   })
   res.status(200).json({ orders })
 })
@@ -28,7 +29,6 @@ router.post("/create", async (req, res) => {
     await createOrderForUser(user.id)
     await clearCartForUser(user.id)
     return res.status(201).json({ message: "Order Placed" })
-
   } catch (error) {
     return res.status(400).json({ error })
   }
@@ -42,11 +42,12 @@ router.post("/cancel/:orderId", async (req, res) => {
   if (!user) return res.status(401).json({ error: "Unauthorized" })
 
   // Cancel the order in the database
-  const orderResponse = await prisma.order.delete({
-    where: {
-      id: orderId,
-      userId: user.id
-    }
+  const orderResponse = await prisma.orderItem.deleteMany({
+    where: { orderId: orderId }
+  })
+
+  const order = await prisma.order.delete({
+    where: { id: orderId, userId: user.id }
   })
 
   res.status(200).json({ message: "Order cancelled successfully", orderResponse })
