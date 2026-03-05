@@ -24,7 +24,7 @@ const Providers = ({ children }: ProvidersProps) => {
         <CheckboxProvider>
           <Provider defaultTheme="light">
             {children}
-            <ReactQueryDevtools />
+            <ReactQueryDevtools position="bottom" buttonPosition="bottom-left"/>
           </Provider>
         </CheckboxProvider>
       </QueryClientProvider>

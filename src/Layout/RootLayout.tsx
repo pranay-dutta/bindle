@@ -1,3 +1,4 @@
+import Assistant from "@/components/assistant/Assistant";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import NavOptions from "@/components/NavOptions";
@@ -19,6 +20,7 @@ const RootLayout = () => {
       <Navbar />
       <NavOptions />
       <Outlet />
+      <Assistant />
       <Footer />
     </>
   );
