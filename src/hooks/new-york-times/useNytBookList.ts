@@ -7,7 +7,7 @@ import ms from "ms";
 
 const useNytBookList = (listName: ListNames) => {
   // const nytClient = createNytClient<List>(`/current/${listName}.json`);
-  const client = createBackendClient<List>(`/books/${listName}`);
+  const client = createBackendClient<List>(`/books/${listName}`, null);
   const getTempData = async () => {
     return client.getNytAll();
   };

@@ -9,10 +9,19 @@ interface CartStore {
   decreaseQty: (book: NytBook | SearchedBook) => void;
   setQty: (book: NytBook | SearchedBook, qty: number) => void;
   getQty: (book: NytBook | SearchedBook) => number;
+  addToCart: (book: NytBook | SearchedBook) => void;
   removeItem: (book: NytBook | SearchedBook) => void;
 }
 const useCartStore = create<CartStore>()((set, get) => ({
   cart: new Map<NytBook | SearchedBook, number>(),
+  addToCart: (book: NytBook | SearchedBook) => {
+    set((state) => {
+      const newCart = new Map(state.cart);
+      const currentQty = newCart.get(book) || 0;
+      newCart.set(book, currentQty + 1);
+      return { cart: newCart };
+    });
+  },
   increaseQty: (book: NytBook | SearchedBook) => {
     set((state) => {
       const newCart = new Map(state.cart);
