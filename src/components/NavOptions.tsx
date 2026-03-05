@@ -3,18 +3,19 @@ import { useNavigate } from "react-router";
 import { IoHomeOutline } from "react-icons/io5";
 import { GiSparkles } from "react-icons/gi";
 import { TbCategoryPlus } from "react-icons/tb";
-import { GoTag } from "react-icons/go";
+import { GoContainer, GoTag } from "react-icons/go";
 import { PiAddressBookLight } from "react-icons/pi";
 
 const navOptions = [
   { label: "Home", link: "/", icon: IoHomeOutline },
+  { label: "Sale", link: "/sale", icon: GoTag },
   { label: "New Releases", link: "/new-releases", icon: GiSparkles },
   {
     label: "Categories",
     link: "/categories/Architecture",
     icon: TbCategoryPlus
   },
-  { label: "Sale", link: "/sale", icon: GoTag },
+  { label: "Orders", link: "/orders", icon: GoContainer },
   { label: "Saved Addresses", link: "/addresses", icon: PiAddressBookLight }
 ];
 const NavOptions = () => {

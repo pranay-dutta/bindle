@@ -27,27 +27,29 @@ const Addresses = () => {
   };
 
   return (
-    <Flex gap={5} flexWrap="wrap" p={5} minH={"60vh"}>
-      {isAdding ? (
-        <AddressForm onCancel={onCancel} />
-      ) : (
-        <Button
-          variant="outline"
-          colorPalette="orange"
-          size="md"
-          onClick={() => setIsAdding(true)}
-          aspectRatio={4 / 3}
-          w="300px"
-          alignSelf="center"
-        >
-          + Add New Address
-        </Button>
-      )}
+    <Box minH={"60vh"}>
+      <Flex gap={5} flexWrap="wrap" p={5} >
+        {isAdding ? (
+          <AddressForm onCancel={onCancel} />
+        ) : (
+          <Button
+            variant="outline"
+            colorPalette="orange"
+            size="md"
+            onClick={() => setIsAdding(true)}
+            aspectRatio={4 / 3}
+            w="300px"
+            alignSelf="center"
+          >
+            + Add New Address
+          </Button>
+        )}
 
-      {allAddresses.addresses.map((address) => (
-        <AddressCardWrapper key={address.id} address={address} />
-      ))}
-    </Flex>
+        {allAddresses.addresses.map((address) => (
+          <AddressCardWrapper key={address.id} address={address} />
+        ))}
+      </Flex>
+    </Box>
   );
 };
 
@@ -191,9 +193,7 @@ const AddressCardWrapper = ({ address }: { address: AddressFormData }) => {
   return isEditing ? (
     <AddressForm address={address} onCancel={onCancel} />
   ) : (
-    <Box>
-      <AddressCard address={address} onEdit={onEdit} />
-    </Box>
+    <AddressCard address={address} onEdit={onEdit} />
   );
 };
 
@@ -246,34 +246,35 @@ const AddressCard = ({ address, onEdit }: AddressCardProps) => {
       <Text fontSize="sm" color="gray.700">
         {address.country}
       </Text>
-
-      <Button
-        variant="surface"
-        colorPalette="orange"
-        width="100%"
-        size="sm"
-        mt={3}
-        onClick={(event) => {
-          event.stopPropagation();
-          onEdit?.();
-        }}
-      >
-        Edit
-      </Button>
-      <Button
-        variant="surface"
-        colorPalette="orange"
-        width="100%"
-        size="sm"
-        mt={3}
-        onClick={async (event) => {
-          event.stopPropagation();
-          await deleteAddress(address.id);
-          queryClient.invalidateQueries({ queryKey: ["addresses"] });
-        }}
-      >
-        Delete
-      </Button>
+      <Flex gap={2} justifyContent="space-between">
+        <Button
+          variant="surface"
+          colorPalette="orange"
+          flex={1}
+          size="sm"
+          mt={3}
+          onClick={(event) => {
+            event.stopPropagation();
+            onEdit?.();
+          }}
+        >
+          Edit
+        </Button>
+        <Button
+          variant="surface"
+          colorPalette="orange"
+          flex={1}
+          size="sm"
+          mt={3}
+          onClick={async (event) => {
+            event.stopPropagation();
+            await deleteAddress(address.id);
+            queryClient.invalidateQueries({ queryKey: ["addresses"] });
+          }}
+        >
+          Delete
+        </Button>
+      </Flex>
     </Flex>
   );
 };
