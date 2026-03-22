@@ -19,8 +19,7 @@ const Addresses = () => {
   const { data: allAddresses, isLoading } = useAllAddress();
 
   if (isLoading) return <Text>Loading...</Text>;
-  if (!allAddresses || allAddresses.addresses.length === 0)
-    return <Text>No addresses found.</Text>;
+  const hasAddress = allAddresses && allAddresses.addresses.length > 0;
 
   const onCancel = () => {
     setIsAdding(false);
@@ -28,7 +27,7 @@ const Addresses = () => {
 
   return (
     <Box minH={"60vh"}>
-      <Flex gap={5} flexWrap="wrap" p={5} >
+      <Flex gap={5} flexWrap="wrap" p={5} maxHeight="400px">
         {isAdding ? (
           <AddressForm onCancel={onCancel} />
         ) : (
@@ -45,9 +44,14 @@ const Addresses = () => {
           </Button>
         )}
 
-        {allAddresses.addresses.map((address) => (
-          <AddressCardWrapper key={address.id} address={address} />
-        ))}
+        {/* If addresses exist */}
+        {hasAddress &&
+          allAddresses.addresses.map((address) => (
+            <AddressCardWrapper key={address.id} address={address} />
+          ))}
+
+        {/* If user has no addresses */}
+        {!hasAddress && <Text fontSize="lg"> No addresses found. </Text>}
       </Flex>
     </Box>
   );
