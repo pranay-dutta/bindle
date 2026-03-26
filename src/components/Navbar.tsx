@@ -1,4 +1,4 @@
-import { Flex, Group } from "@chakra-ui/react";
+import { Box, Flex, Group, SkeletonCircle } from "@chakra-ui/react";
 import StoreTitle from "./StoreTitle";
 import SearchInput from "./SearchInput";
 import CartButton from "./CartButton";
@@ -7,10 +7,13 @@ import {
   SignedOut,
   SignInButton,
   SignUpButton,
-  UserButton
+  UserButton,
+  useUser
 } from "@clerk/clerk-react";
 
 const Navbar = () => {
+  const { isLoaded } = useUser();
+
   return (
     <Flex
       justify="space-between"
@@ -31,8 +34,11 @@ const Navbar = () => {
         </SignedOut>
         {/* Show the user button when the user is signed in */}
         <SignedIn>
-          <UserButton />
+          <Box height="9" width="9" rounded="full">
+            <UserButton />
+          </Box>
         </SignedIn>
+        {!isLoaded && <SkeletonCircle size="9" />}
       </Group>
     </Flex>
   );
