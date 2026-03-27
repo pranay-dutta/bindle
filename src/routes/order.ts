@@ -1,7 +1,7 @@
 import { Router } from "express"
 import { prisma } from "../../lib/prisma"
 import { validateUser } from "../utils/auth"
-import { createOrderForUser } from "../services/orderService"
+import { createOrderForUser, getUserOrders } from "../services/orderService"
 import { clearCartForUser } from "../services/cartService"
 
 const router = Router()
@@ -11,13 +11,7 @@ router.get("/getall", async (req, res) => {
   if (!user) return res.status(401).json({ error: "Unauthorized" })
 
   // Fetch orders for the authenticated user
-  const orders = await prisma.order.findMany({
-    where: { userId: user.id },
-    include: {
-      orderItems: true
-    },
-    orderBy: { createdAt: "desc" }
-  })
+  const orders = await getUserOrders(user.id)
   res.status(200).json({ orders })
 })
 
