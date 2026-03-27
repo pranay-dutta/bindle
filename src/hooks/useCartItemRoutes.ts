@@ -20,7 +20,7 @@ const useCartItemRoutes = () => {
       quantity: 1
     };
 
-    backendClient.post(data);
+    return backendClient.post(data);
   };
   //method to remove a book from the cart
   const removeFromCart = async (bookId: string) => {
