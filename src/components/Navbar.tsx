@@ -35,7 +35,16 @@ const Navbar = () => {
         {/* Show the user button when the user is signed in */}
         <SignedIn>
           <Box height="9" width="9" rounded="full">
-            <UserButton />
+            <UserButton
+              appearance={{
+                elements: {
+                  userButtonAvatarBox: {
+                    width: "100%",
+                    height: "100%"
+                  },
+                }
+              }}
+            />
           </Box>
         </SignedIn>
         {!isLoaded && <SkeletonCircle size="9" />}
