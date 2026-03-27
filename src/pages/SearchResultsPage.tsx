@@ -118,11 +118,11 @@ const BookGrid = ({ data }: { data: SearchData }) => {
       {data.docs.map((book) => {
         const urls = getOLCoverUrls(book.cover_i || 0);
         if (urls.length === 0) return null;
-        
+
         return (
-          <div key={book.key}>
+          <Box maxWidth="min-content" key={book.key}>
             <BookCard book={book} urls={urls} />
-          </div>
+          </Box>
         );
       })}
     </Grid>
