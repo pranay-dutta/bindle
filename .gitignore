@@ -28,3 +28,9 @@ dist-ssr
 
 # Temporary data
 /src/cache/
+
+# Local REST Client request files
+http/*
+
+# Package lock files
+.package-lock.json
