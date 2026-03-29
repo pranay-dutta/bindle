@@ -5,6 +5,7 @@ import orderRoutes from "./order"
 import cartItemRoutes from "./cartItem"
 import cartRoutes from "./cart"
 import addressRoutes from "./address"
+import assistantRoutes from "./assistant"
 import { Router } from "express"
 
 const router = Router()
@@ -16,5 +17,6 @@ router.use("/order", orderRoutes)
 router.use("/cart", cartRoutes)
 router.use("/cart-item", cartItemRoutes)
 router.use("/address", addressRoutes)
+router.use("/assistant", assistantRoutes)
 
 export default router

@@ -14,4 +14,8 @@ app.get("/", (_, res) => {
   res.json("Bindle backend is running...");
 });
 
+app.listen(3000, () => {
+  console.log("Bindle backend is running on port 3000");
+});
+
 export default app;
