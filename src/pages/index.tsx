@@ -1,7 +1,7 @@
 export { default as Addresses } from "./AddressPage";
 export { default as HomePage } from "./Homepage";
 export { default as BookDetailPage } from "./BookDetailPage";
-export { default as CartPage } from "./CartPage";
+export { default as CartPage } from "./cartpage/CartPage";
 export { default as CheckoutPage } from "./CheckoutPage";
 export { default as SearchResultsPage } from "./SearchResultsPage";
 export { default as RecommendationPage } from "./RecommendationPage";
