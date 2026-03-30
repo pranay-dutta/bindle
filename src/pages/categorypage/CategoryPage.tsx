@@ -1,28 +1,15 @@
-import {
-  Box,
-  Button,
-  Text,
-  Flex,
-  Grid,
-  Heading,
-  Stack
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Grid, Heading } from "@chakra-ui/react";
 
 import OpenLibBook from "@/components/open-library/OpenLibBook";
 import type { Subject } from "@/data/open-library-subjects";
 import { SUBJECTS } from "@/data/open-library-subjects";
 import useOpenLibSubjectList from "@/hooks/open-library/useOpenLibSubjectList";
-
-import Checkbox from "@/components/checkbox";
-import { useCheckbox } from "@/components/checkbox/useCheckbox";
-import DateRange from "@/components/DateRange";
-import Pagination from "@/components/Pagination";
-import type { OptionType } from "@/context/CheckboxContext";
-import { useRef, useState } from "react";
-import { useNavigate, useParams, useSearchParams } from "react-router";
 import OpenLibBookSkeleton from "@/components/open-library/OpenLibBookSkeleton";
-import { TfiMoreAlt } from "react-icons/tfi";
-import { TfiMore } from "react-icons/tfi";
+import Pagination from "@/components/Pagination";
+import { useRef, useState } from "react";
+import { TfiMore, TfiMoreAlt } from "react-icons/tfi";
+import { useNavigate, useParams, useSearchParams } from "react-router";
+import LeftWindow from "./LeftWindow";
 
 const CategoryPage = () => {
   const PAGE_SIZE = 12;
@@ -118,11 +105,10 @@ const CategoryPage = () => {
                   <OpenLibBook key={book.key} openLibBook={book} />
                 ))}
           </Grid>
-
-          {/* Pagination Component */}
         </Box>
       </Flex>
 
+      {/* Pagination Component */}
       <Box mx="auto" mt={8} w="fit-content">
         <Pagination pageSize={PAGE_SIZE} totalCount={workCount.current} />
       </Box>
@@ -131,90 +117,3 @@ const CategoryPage = () => {
 };
 
 export default CategoryPage;
-
-const LeftWindow = () => {
-  const { reset: ebookReset } = useCheckbox("ebook");
-  const { reset: sortReset } = useCheckbox("sort");
-  const { reset: languageReset } = useCheckbox("language");
-
-  return (
-    <Stack
-      borderRight={{ base: "none", md: "1px solid" }}
-      borderBottom={{ base: "1px solid", md: "none" }}
-      borderColor="gray.300"
-      pr={{ base: 0, md: 4 }}
-      pb={{ base: 4, md: 0 }}
-      gap={4}
-    >
-      <Checkbox
-        key={sortOptions.id}
-        options={sortOptions.options}
-        group="sort"
-        heading="Select Sort Option"
-        singleCheck
-      />
-      <Text my={2} fontSize="sm">
-        Select Date Range
-      </Text>
-      <DateRange />
-      <Checkbox
-        key={ebookOptions.id}
-        options={ebookOptions.options}
-        group="ebook"
-        heading="Select E-Book Option"
-        singleCheck
-      />
-      {/* Reset filters */}
-      <Button
-        colorPalette="orange"
-        rounded="none"
-        onClick={() => {
-          ebookReset();
-          sortReset();
-          languageReset();
-        }}
-      >
-        Reset Filters
-      </Button>
-    </Stack>
-  );
-};
-
-const languageOptions: { id: number; heading: string; options: OptionType[] } =
-  {
-    id: 1,
-    heading: "Select Language",
-    options: [
-      { label: "English", value: "english" },
-      { label: "Spanish", value: "spanish" },
-      { label: "French", value: "french" },
-      { label: "German", value: "german" },
-      { label: "Dutch", value: "dutch" },
-      { label: "Polish", value: "polish" },
-      { label: "Chinese", value: "chinese" },
-      { label: "Russian", value: "russian" },
-      { label: "Italian", value: "italian" },
-      { label: "Portuguese", value: "portuguese" }
-    ]
-  };
-const sortOptions: { id: number; heading: string; options: OptionType[] } = {
-  id: 2,
-  heading: "Sort By",
-  options: [
-    { label: "Top Rated", value: "rating" },
-    { label: "Most Editions", value: "editions" },
-    { label: "First Published", value: "old" },
-    { label: "Most Recent", value: "new" },
-    { label: "Reading Log", value: "readinglog" },
-    { label: "Trending", value: "trending" },
-    { label: "Random", value: "random" }
-  ]
-};
-const ebookOptions: { id: number; heading: string; options: OptionType[] } = {
-  id: 3,
-  heading: "Ebook",
-  options: [
-    { label: "Yes", value: "yes" },
-    { label: "No", value: "no" }
-  ]
-};
