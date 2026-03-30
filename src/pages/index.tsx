@@ -1,4 +1,4 @@
-export { default as Addresses } from "./AddressPage";
+export { default as Addresses } from "./addresspage/AddressPage";
 export { default as HomePage } from "./Homepage";
 export { default as BookDetailPage } from "./BookDetailPage";
 export { default as CartPage } from "./cartpage/CartPage";
