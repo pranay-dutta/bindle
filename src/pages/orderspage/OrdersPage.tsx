@@ -1,40 +1,15 @@
 import useOrderRoutes from "@/hooks/useOrderRoutes";
-import useImageFallback from "@/hooks/useImageFallback";
 import {
   Box,
   Button,
   Flex,
   Group,
   Heading,
-  Image,
   Text,
   VStack
 } from "@chakra-ui/react";
 import { useQueryClient } from "@tanstack/react-query";
-
-const OrderItemImage = ({ image, title }: { image: string; title: string }) => {
-  const { src, onError } = useImageFallback([image]);
-
-  return (
-    <Box
-      w="100%"
-      aspectRatio={2 / 3}
-      bg="gray.50"
-      p={2}
-      borderBottomWidth="1px"
-    >
-      <Image
-        src={src}
-        onError={onError}
-        alt={title}
-        w="100%"
-        h="100%"
-        objectFit="contain"
-        display="block"
-      />
-    </Box>
-  );
-};
+import OrderItemImage from "./OrderItemImage";
 
 const OrdersPage = () => {
   const { useUserOrders, cancelOrder } = useOrderRoutes();
@@ -93,6 +68,7 @@ const OrdersPage = () => {
                   minW="170px"
                 >
                   <OrderItemImage image={item.image} title={item.bookTitle} />
+
                   <Box p={2}>
                     <Text fontWeight="medium" lineClamp={2}>
                       {item.bookTitle}
