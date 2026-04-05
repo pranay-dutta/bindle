@@ -1,0 +1,21 @@
+//New York Times Book model
+model NytBook {
+  title              String       @id
+  author             String       @db.VarChar(255)
+  amazon_product_url String       @db.VarChar(255)
+  book_image         String       @db.VarChar(255)
+  description        String       @db.Text
+  price              Int          @db.Int
+  primary_isbn10     String       @db.VarChar(255)
+  primary_isbn13     String       @db.VarChar(255)
+  list_id            Int?
+  nyt_book_list      NytBookList? @relation(fields: [list_id], references: [id])
+}
+
+//New York Times BookList model
+model NytBookList {
+  id                Int       @id
+  list_name         String
+  list_name_encoded String
+  books             NytBook[]
+}
