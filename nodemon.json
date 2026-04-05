@@ -1,5 +1,5 @@
 {
   "watch": ["."],
   "ext": "ts,json",
-  "exec": "npx ts-node ./api/index.ts"
+  "exec": "npx tsx ./api/index.ts"
 }

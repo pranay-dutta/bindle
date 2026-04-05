@@ -5,7 +5,9 @@
   "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js",
+    "start": "tsx api/index.ts",
+    "dev": "nodemon",
+    "seed": "tsx src/index.ts",
     "format": "prettier --write ."
   },
   "keywords": [],
@@ -28,7 +30,7 @@
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
-    "@types/node": "^24.0.1",
+    "@types/node": "^25.5.0",
     "nodemon": "^3.1.11",
     "prisma": "^7.0.1",
     "ts-node": "^10.9.2",
