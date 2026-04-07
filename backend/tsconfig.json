@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "types": [
+      "node"
+    ],
+    "paths": {
+      "@/*": [ "./src/*" ],
+      "@lib/*": [ "./lib/*" ],
+    },
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "src/**/*",
+    "api/index.ts",
+    "prisma.config.ts"
+  ]
+}

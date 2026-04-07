@@ -1,0 +1,25 @@
+//User model, related to Order and Address
+model User {
+  id        String    @id
+  email     String    @unique
+  fullName  String    @db.VarChar(255)
+  orders    Order[]
+  addresses Address[]
+  cart      Cart?
+}
+
+//Address of an user, related to User
+model Address {
+  id           String  @id @default(cuid())
+  fullName     String  @db.VarChar(255)
+  mobileNumber String  @db.VarChar(15)
+  addressLine1 String  @db.VarChar(255)
+  addressLine2 String? @db.VarChar(255)
+  city         String  @db.VarChar(255)
+  state        String  @db.VarChar(255)
+  postalCode   String  @db.VarChar(20)
+  country      String  @db.VarChar(255)
+  isDefault    Boolean @default(false)
+  userId       String
+  user         User    @relation(fields: [userId], references: [id])
+}
