@@ -1,0 +1,12 @@
+export { default as Addresses } from "./addresspage/AddressPage";
+export { default as HomePage } from "./Homepage";
+export { default as BookDetailPage } from "./BookDetailPage";
+export { default as CartPage } from "./cartpage/CartPage";
+export { default as CheckoutPage } from "./CheckoutPage";
+export { default as SearchResultsPage } from "./SearchResultsPage";
+export { default as RecommendationPage } from "./RecommendationPage";
+export { default as NewReleasePage } from "./NewReleasePage";
+export { default as EbookPage } from "./EbookPage";
+export { default as SalePage } from "./SalePage";
+export { default as CategoryPage } from "./categorypage/CategoryPage";
+export { default as OrdersPage } from "./OrdersPage";
