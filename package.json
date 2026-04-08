@@ -1,10 +1,13 @@
 {
-  "name": "bindle-monorepo",
+  "name": "bindle",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:frontend": "cd frontend && npm test"
+    "prepare": "husky",
+    "test:frontend": "cd frontend && npm test",
+    "frontend": "cd frontend && pnpm dev",
+    "backend": "cd backend && nodemon"
   },
   "repository": {
     "type": "git",
