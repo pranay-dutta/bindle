@@ -5,7 +5,7 @@ model NytBook {
   amazon_product_url String       @db.VarChar(255)
   book_image         String       @db.VarChar(255)
   description        String       @db.Text
-  price              Int          @db.Int
+  price              Int
   primary_isbn10     String       @db.VarChar(255)
   primary_isbn13     String       @db.VarChar(255)
   list_id            Int?

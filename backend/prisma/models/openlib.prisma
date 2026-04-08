@@ -4,7 +4,7 @@ model OpenLibBook {
   amazonProductUrl String @db.VarChar(255)
   bookImage        String @db.VarChar(255)
   description      String @db.Text
-  price            Int    @db.Int
+  price            Int    
   primaryIsbn10    String @db.VarChar(255)
   primaryIsbn13    String @db.VarChar(255)
   listId           Int?
