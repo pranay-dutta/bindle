@@ -5,10 +5,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import BookCardHorizontal from "./BookCardHorizontal";
 
 const AdSection = () => {
-  const { isLoading, error, data } = useNytBookList("hardcover-nonfiction");
+  const { isLoading, error, data } = useNytBookList("mass-market-monthly");
   if (isLoading) return <div>Loading...</div>;
+
   if (error) return <div>{error.message}</div>;
-  if (!data) return null;
+  if (!data || !data.books) return null;
 
   return (
     <Swiper
@@ -23,7 +24,7 @@ const AdSection = () => {
       spaceBetween={10}
       modules={[Pagination]}
     >
-      {data.books.map(
+      {data.books?.map(
         (book) =>
           book.book_image && (
             <SwiperSlide key={book.primary_isbn13}>

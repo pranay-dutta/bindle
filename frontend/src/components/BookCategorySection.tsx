@@ -1,15 +1,16 @@
 import { Box, Heading } from "@chakra-ui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import BookCardVertical from "./BookCardVertical";
-import type { List } from "@/interfaces/new-york-times/List";
 import type { ListNames } from "@/interfaces/new-york-times/ListNames";
+import type { NytBookList } from "@/hooks/new-york-times/useNytBookList";
 
 interface BookCategorySectionProps {
-  list: List;
+  list?: NytBookList;
   heading: "For Little Readers" | "Self Development";
 }
 
 const BookCategorySection = ({ list, heading }: BookCategorySectionProps) => {
+  if (!list || !list.books) return null;
   const books = list.books;
 
   return (

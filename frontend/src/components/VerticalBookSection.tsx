@@ -3,17 +3,19 @@ import { Box, Heading, Flex, Text, Button, Group } from "@chakra-ui/react";
 import { Scrollbar } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import BookImage from "./BookImage";
-import type { List } from "@/interfaces/new-york-times/List";
 import { useState } from "react";
 import type { NytBook } from "@/interfaces/new-york-times/NytBook";
 import useCartItemRoutes from "@/hooks/useCartItemRoutes";
+import type { NytBookList } from "@/hooks/new-york-times/useNytBookList";
 
 interface VerticalBookSectionProps {
-  list: List;
+  list?: NytBookList;
   heading: string;
 }
 
 const VerticalBookSection = ({ list, heading }: VerticalBookSectionProps) => {
+  if (!list || !list.books) return null;
+
   const books = list.books;
 
   return (

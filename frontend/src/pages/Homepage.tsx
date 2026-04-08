@@ -7,9 +7,21 @@ import { Box, Container, Flex, Heading } from "@chakra-ui/react";
 import { BsStars } from "react-icons/bs";
 
 const Homepage = () => {
-  const { data: childrenBooks } = useNytBookList( "childrens-middle-grade-hardcover");
-  const { data: selfDevelopmentBooks } = useNytBookList( "advice-how-to-and-miscellaneous");
-  const { data: seriesBooks } = useNytBookList("series-books");
+  const { data: childrenBooks, isLoading: isLoadingChildrenBooks } =
+    useNytBookList("childrens-middle-grade-hardcover");
+  const {
+    data: selfDevelopmentBooks,
+    isLoading: isLoadingSelfDevelopmentBooks
+  } = useNytBookList("advice-how-to-and-miscellaneous");
+  const { data: seriesBooks, isLoading: isLoadingSeriesBooks } =
+    useNytBookList("series-books");
+
+  const isLoading =
+    isLoadingChildrenBooks ||
+    isLoadingSelfDevelopmentBooks ||
+    isLoadingSeriesBooks;
+
+  if (isLoading) return <div>Loading...</div>;
   if (!childrenBooks || !seriesBooks || !selfDevelopmentBooks) return null;
 
   return (
@@ -56,11 +68,11 @@ const Homepage = () => {
             maxW={{ base: "full", md: "60%", lg: "70%" }}
           >
             <BookCategorySection
-              list={childrenBooks.data}
+              list={childrenBooks}
               heading={"For Little Readers"}
             />
             <BookCategorySection
-              list={selfDevelopmentBooks.data}
+              list={selfDevelopmentBooks}
               heading={"Self Development"}
             />
           </Container>
@@ -71,7 +83,7 @@ const Homepage = () => {
             flex={1}
             maxW={{ base: "full", md: "40%", lg: "30%" }}
           >
-            <VerticalBookSection list={seriesBooks.data} heading={"Series"} />
+            <VerticalBookSection list={seriesBooks} heading={"Series"} />
           </Container>
         </Container>
       </Box>

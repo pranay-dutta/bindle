@@ -3,10 +3,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import BookCardVertical from "./BookCardVertical";
 
 const OurRecommendation = () => {
-  const { isLoading, error, data } = useNytBookList("young-adult-hardcover");
+  const { isLoading, error, data } = useNytBookList("picture-books");
   if (isLoading) return <div>Loading...</div>;
+
+  if (!data || !data.books) return null;
   if (error) return <div>{error.message}</div>;
-  if (!data) return null;
 
   return (
     <Swiper
@@ -22,10 +23,10 @@ const OurRecommendation = () => {
       spaceBetween={8}
     >
       {data.books.map(
-        (book, index) =>
+        (book) =>
           book.book_image && (
             <SwiperSlide key={book.primary_isbn13 || book.title}>
-              <BookCardVertical key={book.title} index={index} book={book} />
+              <BookCardVertical book={book} />
             </SwiperSlide>
           )
       )}
