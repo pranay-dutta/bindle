@@ -1,4 +1,3 @@
-import OpenLibBookReel from "@/components/open-library/OpenLibBookReel";
 import { CURRENCY_SYMBOL } from "@/constants";
 import useOpenLibBook from "@/hooks/open-library/useOpenLibBook";
 import useOpenLibWork from "@/hooks/open-library/useOpenLibWork";

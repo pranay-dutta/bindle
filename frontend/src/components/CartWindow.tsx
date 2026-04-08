@@ -3,7 +3,7 @@ import useCartStore from "@/store/useCartStore";
 import { toNormalCase } from "@/utils";
 import { Text, Box, Image, Flex, Button } from "@chakra-ui/react";
 
-//TODO: Popup cart window might not use it
+//TODO: fix it if you're using it
 const CartWindow = () => {
   const cart = useCartStore((state) => state.cart);
   const increaseQty = useCartStore((state) => state.increaseQty);
@@ -27,9 +27,14 @@ const CartWindow = () => {
         Your Cart
       </Text>
       {[...cart.keys()].map((item) => (
-        <Flex key={item.primary_isbn13} alignItems="center" gap={4} mb={2}>
+        <Flex key={item.price} alignItems="center" gap={4} mb={2}>
           <Box height={180} width={120}>
-            <Image width="100%" height="100%" src={item.book_image} alt={item.title} />
+            <Image
+              width="100%"
+              height="100%"
+              src={item.price}
+              alt={item.title}
+            />
           </Box>
 
           <Box>
