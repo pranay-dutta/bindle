@@ -1,0 +1,24 @@
+{
+  "name": "bindle-monorepo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:frontend": "cd frontend && npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pranay-dutta/bindle.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/pranay-dutta/bindle/issues"
+  },
+  "homepage": "https://github.com/pranay-dutta/bindle#readme",
+  "devDependencies": {
+    "husky": "^9.1.7"
+  }
+}
