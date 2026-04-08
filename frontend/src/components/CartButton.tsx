@@ -1,15 +1,25 @@
 import { CURRENCY_SYMBOL } from "@/constants";
-import { Flex, Text } from "@chakra-ui/react";
-import { FaShoppingCart } from "react-icons/fa";
+import useCartRoutes from "@/hooks/useCartRoutes";
+import { Box, Text } from "@chakra-ui/react";
+import { BsCart2 } from "react-icons/bs";
 import { useNavigate } from "react-router";
 
 const CartButton = ({ amount = 0 }: { amount?: number }) => {
   // const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { useCartItems } = useCartRoutes();
+  const { data } = useCartItems();
+
+  //TODO: This is a temporary solution to show the cart value.
+  const cartValue =
+    data?.cart?.items?.reduce((total, item) => {
+      return total + item.price * item.quantity;
+    }, 0) ?? 0;
 
   const navigate = useNavigate();
   return (
     <>
-      <Flex
+      <Box
+        display="flex"
         border="1px"
         borderStyle="solid"
         borderColor="gray.300"
@@ -19,13 +29,15 @@ const CartButton = ({ amount = 0 }: { amount?: number }) => {
         borderRadius="sm"
         flexWrap="nowrap"
         onClick={() => navigate("/cart")}
-        _hover={{ boxShadow: "md", cursor: "pointer" }}
+        _hover={{
+          cursor: "pointer"
+        }}
       >
-        <FaShoppingCart />
-        <Text textWrap="nowrap">
-          {CURRENCY_SYMBOL} {amount}
+        <BsCart2 size={20} />
+        <Text textWrap="nowrap" minWidth="14" textAlign="right">
+          {CURRENCY_SYMBOL} {amount || cartValue}
         </Text>
-      </Flex>
+      </Box>
       {/* {isOpen && <CartWindow />} */}
     </>
   );
