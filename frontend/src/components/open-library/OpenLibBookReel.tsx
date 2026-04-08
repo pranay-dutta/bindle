@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import OpenLibBook from "./OpenLibBook";
 
 const OpenLibBookReel = () => {
-  const { data, isLoading, error } = useOpenLibSubjectList("Architecture");
+  const { data, isLoading, error } = useOpenLibSubjectList("Architecture", 0, 20);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading books</div>;

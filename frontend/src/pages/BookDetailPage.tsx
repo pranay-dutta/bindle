@@ -73,7 +73,7 @@ const BookDetailPage = () => {
 
           {/* Book description */}
           <Box>
-            <Text>
+            <Text lineClamp={3} color="gray.700">
               {extractWorkDescription(openLibWork) ||
                 (openLibBook && openLibBook.description?.value)}
             </Text>
@@ -91,10 +91,11 @@ const BookDetailPage = () => {
           </Flex>
         </Flex>
       </Flex>
-      <Heading as="h2" size="md" mb={4}>
+      //TODO: remove this comment after you have consistent details page
+      {/* <Heading as="h2" size="md" mb={4}>
         Similar Books
       </Heading>
-      <OpenLibBookReel />
+      <OpenLibBookReel /> q*/}
     </Box>
   );
 };
