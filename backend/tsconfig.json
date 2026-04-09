@@ -18,6 +18,5 @@
   "include": [
     "src/**/*",
     "api/index.ts",
-    "prisma.config.ts"
   ]
 }
