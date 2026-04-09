@@ -1,8 +1,8 @@
-import { List } from "@/interfaces/List"
-import createNytClient from "@/services/api-client/nytClient"
-import { createBookList, createBooks } from "@/services/nytDatabaseService"
+import { List } from "../interfaces/List"
+import createNytClient from "../services/api-client/nytClient"
+import { createBookList, createBooks } from "../services/nytDatabaseService"
 import { Request, Router } from "express"
-import { prisma } from "@lib/prisma"
+import { prisma } from "../../lib/prisma"
 
 const router = Router()
 

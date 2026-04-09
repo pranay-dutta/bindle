@@ -1,5 +1,5 @@
-import { List } from "@/interfaces/List"
-import { prisma } from "@lib/prisma"
+import { List } from "../interfaces/List"
+import { prisma } from "../../lib/prisma"
 
 /**
  * @param data - List data to be created or updated in database

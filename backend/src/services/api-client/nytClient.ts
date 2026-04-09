@@ -1,7 +1,7 @@
 import "dotenv/config"
 import axios from "axios"
 import { env } from "node:process"
-import { FetchResponse } from "@/interfaces/FetchResponse"
+import { FetchResponse } from "../../interfaces/FetchResponse"
 
 const client = axios.create({
   baseURL: env.NYT_URL,
